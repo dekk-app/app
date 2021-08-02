@@ -7,24 +7,16 @@ const prisma = new PrismaClient();
 
 /* eslint-disable new-cap */
 export default NextAuth({
+	pages: {
+		signIn: "/auth/signin",
+		signOut: "/auth/signout",
+		error: "/auth/error",
+		verifyRequest: "/auth/verify-request",
+	},
 	providers: [
-		// Activate once we have a developer account
-		// providers.Apple({
-		// 	clientId: process.env.APPLE_ID,
-		// 	clientSecret: {
-		// 		appleId: process.env.APPLE_ID,
-		// 		teamId: process.env.APPLE_TEAM_ID,
-		// 		privateKey: process.env.APPLE_PRIVATE_KEY,
-		// 		keyId: process.env.APPLE_KEY_ID,
-		// 	},
-		// }),
 		Providers.Google({
 			clientId: process.env.GOOGLE_CLIENT_ID,
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-		}),
-		Providers.Facebook({
-			clientId: process.env.FACEBOOK_CLIENT_ID,
-			clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
 		}),
 		Providers.GitHub({
 			clientId: process.env.GITHUB_CLIENT_ID,
@@ -86,6 +78,23 @@ export default NextAuth({
 		// if you want to override the default behaviour.
 		// async encode({ secret, token, maxAge }) {},
 		// async decode({ secret, token, maxAge }) {},
+	},
+	callbacks: {
+		async jwt(token, user) {
+			// Add the user into the token so that it can be used in the session
+			// "user" is defined when the user signs in
+			if (user !== undefined) {
+				token.user = user;
+			}
+
+			return token;
+		},
+
+		async session(session, token) {
+			// Add the user into the session
+			session.user = token.user;
+			return session;
+		},
 	},
 });
 /* eslint-enable new-cap */
