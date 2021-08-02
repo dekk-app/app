@@ -4,11 +4,12 @@
   "main": "n/a",
   "license": "UNLICENSED",
   "scripts": {
-    "prebuild": "yarn mock:sw:clean",
+    "prebuild": "yarn mock:sw:clean; yarn dekk-backend:clean",
     "build": "next build",
     "cypress:run": "npx cypress run --record",
     "cypress:run-local": "npx cypress run",
     "cypress:open": "npx cypress open",
+    "dekk-backend:clean": "npx rimraf@3.0.2 node_modules/@dekk-app/dekk-backend/src/colonies/prisma/client/query-engine-darwin node_modules/@dekk-app/dekk-backend/src/colonies/prisma/client/query-engine-debian-openssl-1.1.x",
     "dev": "next",
     "graphql:setup": "node prepare/graphql-setup.js",
     "graphql:types": "graphql-codegen",
