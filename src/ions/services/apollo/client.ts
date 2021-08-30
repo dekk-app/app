@@ -3,6 +3,7 @@ import { PageProps } from "@/types";
 import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject } from "@apollo/client";
 import merge from "deepmerge";
 import isEqual from "lodash.isequal";
+import process from "process";
 import { useMemo } from "react";
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;

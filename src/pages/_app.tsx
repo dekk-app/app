@@ -1,7 +1,8 @@
 import "@/ions/fonts/poppins.css";
-import { ConsentProvider } from "@/ions/hooks/consent/context";
 import { useApollo } from "@/ions/services/apollo/client";
 import { cache } from "@/ions/services/emotion/cache";
+import { globalStyles } from "@/ions/styles";
+import { dark, light } from "@/ions/theme";
 import { PageProps } from "@/types";
 import { ApolloProvider } from "@apollo/client";
 import {
@@ -14,15 +15,14 @@ import { Provider as NextAuthProvider } from "next-auth/client";
 import { appWithTranslation } from "next-i18next";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import Script from "next/script";
 import React, { useEffect, useState } from "react";
 import useDarkMode from "use-dark-mode";
 import pkg from "../../package.json";
 
 export const fontFaces = css`
 	body {
-		font-family: "Poppins", sans-serif;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+			sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 	}
 `;
 
@@ -35,17 +35,17 @@ export const debugging = css`
 
 const App = ({ Component, pageProps }: AppProps<PageProps>) => {
 	const { value: darkMode } = useDarkMode();
-	const [theme, setTheme] = useState({});
+	const [theme, setTheme] = useState(dark);
 	const apolloClient = useApollo(pageProps as PageProps);
-	const { locale } = useRouter();
 
 	useEffect(() => {
-		setTheme({});
+		setTheme(darkMode ? dark : light);
 	}, [darkMode]);
 
 	return (
 		<>
 			<Global styles={fontFaces} />
+			<Global styles={globalStyles} />
 			<Head>
 				<title key="title">Dekk</title>
 				<meta charSet="utf-8" />
@@ -83,23 +83,17 @@ const App = ({ Component, pageProps }: AppProps<PageProps>) => {
 					href={`/icons/icon-16x16.png?${pkg.version}`}
 				/>
 				<link rel="manifest" href="/manifest.json" />
-				<link rel="shortcut icon" href={`/	favicon.ico?${pkg.version}`} />
+				<link rel="shortcut icon" href={`/favicon.ico?${pkg.version}`} />
 			</Head>
-			<ConsentProvider consent={(pageProps as PageProps).consent ?? null}>
-				<NextAuthProvider session={(pageProps as PageProps).session}>
-					<ApolloProvider client={apolloClient}>
-						<EmotionCacheProvider value={cache}>
-							<EmotionThemeProvider theme={theme}>
-								<Component {...pageProps} />
-							</EmotionThemeProvider>
-						</EmotionCacheProvider>
-					</ApolloProvider>
-				</NextAuthProvider>
-			</ConsentProvider>
-			<Script
-				src={`https://consent.cookiefirst.com/banner.js?cookiefirst-key=${process.env.NEXT_PUBLIC_COOKIEFIRST_KEY}&language=${locale}`}
-				strategy="lazyOnload"
-			/>
+			<NextAuthProvider session={(pageProps as PageProps).session}>
+				<ApolloProvider client={apolloClient}>
+					<EmotionCacheProvider value={cache}>
+						<EmotionThemeProvider theme={theme}>
+							<Component {...pageProps} />
+						</EmotionThemeProvider>
+					</EmotionCacheProvider>
+				</ApolloProvider>
+			</NextAuthProvider>
 		</>
 	);
 };

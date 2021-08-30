@@ -30,4 +30,7 @@ export const globalStyles = css`
 	#__next {
 		display: contents;
 	}
+	a {
+		color: currentColor;
+	}
 `;
