@@ -2,7 +2,8 @@ import "@/ions/fonts/poppins.css";
 import { useApollo } from "@/ions/services/apollo/client";
 import { cache } from "@/ions/services/emotion/cache";
 import { globalStyles } from "@/ions/styles";
-import { dark, light } from "@/ions/theme";
+import { light } from "@dekk-ui/theme/light";
+import { dark } from "@dekk-ui/theme/dark";
 import { PageProps } from "@/types";
 import { ApolloProvider } from "@apollo/client";
 import {
