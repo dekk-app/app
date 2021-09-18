@@ -7,11 +7,11 @@ export const globalStyles = css`
 	*::before,
 	*::after {
 		box-sizing: border-box;
-		user-select: none;
 	}
 
 	html {
 		font-size: 16px;
+		user-select: none;
 	}
 
 	body {
