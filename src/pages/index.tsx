@@ -89,7 +89,7 @@ const Page: NextPage<PageProps> = () => {
 							type="email"
 							value={email}
 							onChange={event_ => {
-								setEmail((event_.target as HTMLInputElement).value);
+								setEmail(event_.target.value);
 							}}
 						/>
 					</StyledFieldWrapper>
