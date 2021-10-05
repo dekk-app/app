@@ -33,7 +33,7 @@ export const StyledCenteredRow = styled.div`
 
 export const StyledButtonRow = styled.div`
 	display: grid;
-	grid-template-columns: repeat(auto-fit, ${pxToRem(32)});
+	grid-template-columns: repeat(auto-fit, minmax(${pxToRem(32)}, min-content));
 	flex-grow: 1;
 	align-content: center;
 	align-items: center;
@@ -43,9 +43,13 @@ export const StyledButtonRow = styled.div`
 	`};
 `;
 
-export const StyledBox = styled.div`
-	${({ theme }) => css`
+export const StyledBox = styled.div<{ isScrollable?: boolean }>`
+	${({ theme, isScrollable }) => css`
 		padding: ${pxToRem(theme.space.s)};
+		${isScrollable &&
+		css`
+			overflow: auto;
+		`};
 	`};
 `;
 
@@ -89,9 +93,10 @@ export const StyledHeader = styled.header`
 export const StyledLeft = styled.aside`
 	display: flex;
 	grid-area: Left;
-	flex-wrap: wrap;
-	align-content: flex-start;
-	align-items: flex-start;
+	flex-direction: column;
+	justify-content: flex-start;
+	height: 100%;
+	overflow: hidden;
 	${({ theme }) => css`
 		background: ${theme.ui.background["1"]};
 		color: ${theme.ui.text["1"]};
@@ -111,5 +116,12 @@ export const StyledRight = styled.aside`
 `;
 
 export const StyledMain = styled.main`
+	display: flex;
+	position: relative;
 	grid-area: Main;
+	overflow: hidden;
+	${({ theme }) => css`
+		background: ${theme.ui.background["0"]};
+		color: ${theme.ui.text["1"]};
+	`};
 `;
