@@ -215,8 +215,8 @@ const Layer = ({ layer, slide }: LayerProps) => {
 					}}
 				>
 					<Text
-						fontSize={layer.font.size / 100}
-						overflowWrap="normal"
+						fontSize={layer.font.size}
+						overflowWrap="break-word"
 						maxWidth={layer.width ?? 16}
 						textAlign="center"
 						color={layer.color || slide.color}
@@ -227,7 +227,7 @@ const Layer = ({ layer, slide }: LayerProps) => {
 						<Html transform distanceFactor={20}>
 							<div
 								style={{
-									fontSize: (layer.font.size / 100) * 20,
+									fontSize: layer.font.size * 20,
 									minWidth: "1em",
 									maxWidth: (layer.width ?? 16) * 20,
 									minHeight: "1em",

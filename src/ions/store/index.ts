@@ -136,7 +136,7 @@ export const useStore = create<Store>(set => ({
 					text: "Title",
 					id: "0_title",
 					font: {
-						size: 240,
+						size: 3,
 						weight: 400,
 						family: "Roboto",
 					},
@@ -149,7 +149,7 @@ export const useStore = create<Store>(set => ({
 					text: "Subtitle",
 					id: "0_subtitle",
 					font: {
-						size: 140,
+						size: 2,
 						weight: 400,
 						family: "Roboto",
 					},
@@ -169,13 +169,13 @@ export const useStore = create<Store>(set => ({
 				{
 					type: "text",
 					__typename: "text",
-					x: -4,
+					x: -4.5,
 					y: 2,
 					width: 4.5,
 					text: "Title",
 					id: "1_title",
 					font: {
-						size: 240,
+						size: 2,
 						weight: 400,
 						family: "Roboto",
 					},
@@ -183,13 +183,13 @@ export const useStore = create<Store>(set => ({
 				{
 					type: "text",
 					__typename: "text",
-					x: -4,
+					x: -4.5,
 					y: -1,
 					width: 4.5,
 					text: "Lorem ipsum nunquam examinare victrix.",
 					id: "1_copy",
 					font: {
-						size: 60,
+						size: 0.5,
 						weight: 400,
 						family: "Roboto",
 					},
