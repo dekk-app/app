@@ -2,16 +2,13 @@ import MainNavigation from "@/molecules/main-navigation";
 import UserArea from "@/molecules/user-area";
 import Layout from "@/organisms/layout/layout-with-left";
 import { StyledHeader, StyledLeft, StyledMain } from "@/organisms/layout/styled";
-import React, { FC, memo, useEffect } from "react";
+import React, { FC, memo } from "react";
 
 export interface UserPageProps {
 	data?: unknown;
 }
 
-const UserPage: FC<UserPageProps> = ({ children, data }) => {
-	useEffect(() => {
-		console.log(data);
-	}, [data]);
+const UserPage: FC<UserPageProps> = ({ children }) => {
 	return (
 		<Layout>
 			<StyledHeader>HEADER</StyledHeader>

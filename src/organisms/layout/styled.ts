@@ -1,4 +1,5 @@
 import { pxToRem } from "@/ions/utils/unit";
+import { focus } from "@dekk-ui/focus-ring";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
@@ -33,7 +34,7 @@ export const StyledCenteredRow = styled.div`
 
 export const StyledButtonRow = styled.div`
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(${pxToRem(32)}, min-content));
+	grid-template-columns: repeat(auto-fit, minmax(${pxToRem(32)}, max-content));
 	flex-grow: 1;
 	align-content: center;
 	align-items: center;
@@ -43,9 +44,51 @@ export const StyledButtonRow = styled.div`
 	`};
 `;
 
-export const StyledBox = styled.div<{ isScrollable?: boolean }>`
-	${({ theme, isScrollable }) => css`
+export const StyledPressable = styled.button<{ indentLevel?: number }>`
+	display: flex;
+	position: relative;
+	align-content: center;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	border: 0;
+	background: none;
+	color: inherit;
+	font-family: inherit;
+	font-size: 1em;
+	text-align: left;
+
+	&:focus {
+		outline: 0;
+	}
+
+	&:focus-visible::before {
+		content: "";
+		position: absolute;
+		top: 2px;
+		right: 2px;
+		bottom: 2px;
+		left: 2px;
+		${focus};
+	}
+
+	&:hover {
+		background: rgba(0, 0, 0, 0.2);
+	}
+
+	&:active {
+		background: rgba(0, 0, 0, 0.4);
+	}
+
+	${({ theme, indentLevel = 0 }) => css`
 		padding: ${pxToRem(theme.space.s)};
+		padding-left: ${pxToRem(theme.space.s * (indentLevel + 1))};
+	`};
+`;
+
+export const StyledBox = styled.div<{ isScrollable?: boolean; noSpaces?: boolean }>`
+	${({ theme, isScrollable, noSpaces }) => css`
+		padding: 0 ${noSpaces ? 0 : pxToRem(theme.space.s)};
 		${isScrollable &&
 		css`
 			overflow: auto;
@@ -55,11 +98,11 @@ export const StyledBox = styled.div<{ isScrollable?: boolean }>`
 
 export const StyledFieldRow = styled.div`
 	display: grid;
-	grid-template-columns: 30% 1fr;
+	grid-template-columns: 1fr 150px;
 	flex-grow: 1;
 	${({ theme }) => css`
 		grid-gap: ${pxToRem(theme.space.xs)};
-		padding: ${pxToRem(theme.space.xxs)} ${pxToRem(theme.space.s)};
+		padding: ${pxToRem(theme.space.xs)} ${pxToRem(theme.space.s)};
 	`};
 `;
 
@@ -77,7 +120,7 @@ export const StyledLayoutWithRight = styled(StyledLayout)`
 
 export const StyledLayoutWithLeftRight = styled(StyledLayout)`
 	grid-template-areas: "Header Header Header" "Left Main Right";
-	grid-template-columns: ${pxToRem(250)} 1fr ${pxToRem(250)};
+	grid-template-columns: ${pxToRem(250)} 1fr ${pxToRem(350)};
 	grid-template-rows: ${pxToRem(48)} 1fr;
 `;
 
@@ -106,9 +149,10 @@ export const StyledLeft = styled.aside`
 export const StyledRight = styled.aside`
 	display: flex;
 	grid-area: Right;
-	flex-wrap: wrap;
-	align-content: flex-start;
-	align-items: flex-start;
+	flex-direction: column;
+	justify-content: flex-start;
+	height: 100%;
+	overflow: hidden;
 	${({ theme }) => css`
 		background: ${theme.ui.background["1"]};
 		color: ${theme.ui.text["1"]};

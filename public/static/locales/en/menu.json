@@ -1,8 +1,9 @@
 {
-  "profile":  "Profile",
   "account": "Account",
-  "preferences":  "Preferences",
+  "dashboard": "Dashboard",
+  "libraries": "Libraries",
+  "preferences": "Preferences",
+  "profile": "Profile",
   "projects": "Projects",
-  "libraries":  "Libraries",
   "teams": "Teams"
 }

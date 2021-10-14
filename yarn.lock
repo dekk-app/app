@@ -1132,7 +1132,7 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.0", "@babel/runtime@^7.13.10", "@babel/runtime@^7.13.17", "@babel/runtime@^7.14.0", "@babel/runtime@^7.14.5", "@babel/runtime@^7.14.6", "@babel/runtime@^7.15.4", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.0", "@babel/runtime@^7.13.10", "@babel/runtime@^7.13.17", "@babel/runtime@^7.14.0", "@babel/runtime@^7.14.5", "@babel/runtime@^7.14.6", "@babel/runtime@^7.15.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
   version "7.15.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.15.4.tgz#fd17d16bfdf878e6dd02d19753a39fa8a8d9c84a"
   integrity sha512-99catp6bHCaxr4sJ/DbTGgHS4+Rs2RVd2g7iOap6SLGPDknRK9ztKNsE/Fg6QhSeh1FGE5f6gHGQmvvn3I3xhw==
@@ -1432,6 +1432,26 @@
     "@dekk-ui/theme" "^0.4.0"
     "@dekk-ui/utils" "^0.4.0"
 
+"@dekk-ui/color-input-field@0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/color-input-field/-/color-input-field-0.4.1.tgz#52991b1b87a9289f0e0c8d80fcf78b0a63000b5e"
+  integrity sha512-NRBRIQ24sfBYEqzzHUtOVmq4CoFhqSWoVlyTaNmu0TwzYPMTv0dGPlk8zgZRVAQgJMPTmaAFh3pZzI3kTVEzzw==
+  dependencies:
+    "@dekk-ui/combined-input-field" "^0.4.0"
+    "@dekk-ui/input-field" "^0.4.0"
+    "@dekk-ui/theme" "^0.4.0"
+    "@dekk-ui/utils" "^0.4.0"
+
+"@dekk-ui/combined-input-field@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/combined-input-field/-/combined-input-field-0.4.0.tgz#921a8fe13c84ddc02bbb5059a2e711a1ec63544d"
+  integrity sha512-OkpJ6UgYYv6yU7zw4L9YAnnI1WcZAMzUbaL7u4ei70nWMm2zL4wA45AFNziXP6lC/ei+0A8MFWDDhHvONbPuMw==
+  dependencies:
+    "@dekk-ui/focus-ring" "^0.4.0"
+    "@dekk-ui/input-field" "^0.4.0"
+    "@dekk-ui/theme" "^0.4.0"
+    "@dekk-ui/utils" "^0.4.0"
+
 "@dekk-ui/create-token@^0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@dekk-ui/create-token/-/create-token-0.4.0.tgz#b4a10243287e142c2fa0b691937455fa72b2f6d8"
@@ -1462,7 +1482,7 @@
     "@dekk-ui/utils" "^0.4.0"
     type-fest "^2.3.3"
 
-"@dekk-ui/icon@0.4.0":
+"@dekk-ui/icon@0.4.0", "@dekk-ui/icon@^0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@dekk-ui/icon/-/icon-0.4.0.tgz#9734c3a1f42fa7b2e52f805a0665c4fd23d69801"
   integrity sha512-PEHfXp3IXpFvp5M/yGSm/5TAcGrRPuerz+2FyqAJc/3he2wCT6+oIExS3lDotLHWIFdUNHBKHo2kwOaKbaRivA==
@@ -1476,7 +1496,7 @@
   resolved "https://registry.yarnpkg.com/@dekk-ui/icons/-/icons-0.4.0.tgz#7c0a24f3d416416a5fad841cd746b55caad677cd"
   integrity sha512-/vayBKXM6EMcZ6+Xc5hZHpyVIoAjQFaOPIIg3b+HBIqGKZ5OWKPdx7EHJHP+ypB4lew8helW/hAbhH12UcIwQg==
 
-"@dekk-ui/input-field@0.4.0":
+"@dekk-ui/input-field@0.4.0", "@dekk-ui/input-field@^0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@dekk-ui/input-field/-/input-field-0.4.0.tgz#be5545f7d8dd0ed99b86180e74a42c0dbff73fb9"
   integrity sha512-UvstLh800Q+CX+zYLBn38W3LXJGnCNp6WIKYOFnhCqUp/IsTUUVoO+yUmtWWgwYvysxR+3Jx5Xme3bW2b5Mjog==
@@ -1494,6 +1514,19 @@
     "@dekk-ui/theme" "^0.4.0"
     "@dekk-ui/utils" "^0.4.0"
     type-fest "^2.3.3"
+
+"@dekk-ui/select@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/select/-/select-0.4.0.tgz#4d824bb2ce9dd7ca1a629451f9b26d99fd9559a1"
+  integrity sha512-3ciTb1TSKueluRXz94QNgjx00N3QV3s9tBZIgi1YTWW7vyep3UkLsWSdsjFL6hPH7T9YjJzSeLIxOaU6G1NtGw==
+  dependencies:
+    "@dekk-ui/focus-ring" "^0.4.0"
+    "@dekk-ui/icon" "^0.4.0"
+    "@dekk-ui/icons" "^0.4.0"
+    "@dekk-ui/input-field" "^0.4.0"
+    "@dekk-ui/theme" "^0.4.0"
+    "@dekk-ui/utils" "^0.4.0"
+    react-select "^4.3.1"
 
 "@dekk-ui/theme@0.4.0", "@dekk-ui/theme@^0.4.0":
   version "0.4.0"
@@ -1559,7 +1592,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.5.tgz#2c40f81449a4e554e9fc6396910ed4843ec2be50"
   integrity sha512-igX9a37DR2ZPGYtV6suZ6whr8pTFtyHL3K/oLUotxpSVO2ASaprmAe2Dkq7tBo7CRY7MMDrAa9nuQP9/YG8FxQ==
 
-"@emotion/react@11.4.1":
+"@emotion/react@11.4.1", "@emotion/react@^11.1.1":
   version "11.4.1"
   resolved "https://registry.yarnpkg.com/@emotion/react/-/react-11.4.1.tgz#a1b0b767b5bad57515ffb0cad9349614d27f4d57"
   integrity sha512-pRegcsuGYj4FCdZN6j5vqCALkNytdrKw3TZMekTzNXixRg4wkLsU5QEaBG5LC6l01Vppxlp7FE3aTHpIG5phLg==
@@ -2656,6 +2689,14 @@
   version "2.8.10"
   resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.10.tgz#61cc8469849e5bcdd0c7044122265c39cec10cf4"
   integrity sha512-C7srjHiVG3Ey1nR6d511dtDkCEjxuN9W1HWAEjGq8kpcwmNM6JJkpC0xvabM7BXTG2wDq8Eu33iH9aQKa7IvLQ==
+
+"@types/draft-js@^0.11.6":
+  version "0.11.6"
+  resolved "https://registry.yarnpkg.com/@types/draft-js/-/draft-js-0.11.6.tgz#0a141dbd04a65c1c03c3852006c1b46c3d1d4f08"
+  integrity sha512-TY5/Ba9m/uXAJKJc9AxV8r3OpjXk7G0DoI1v99g9aGsx5mJSIK46f2VsFWR8aVTgMxFoxbDLx79Hkri+EbCOYQ==
+  dependencies:
+    "@types/react" "*"
+    immutable "~3.7.4"
 
 "@types/eslint-scope@^3.7.0":
   version "3.7.1"
@@ -5342,6 +5383,11 @@ core-js@^3:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.17.3.tgz#8e8bd20e91df9951e903cabe91f9af4a0895bc1e"
   integrity sha512-lyvajs+wd8N1hXfzob1LdOCCHFU4bGMbqqmLn1Q4QlCpDqWPpGf+p0nj+LNrvDDG33j0hZXw2nsvvVpHysxyNw==
 
+core-js@^3.6.4:
+  version "3.18.3"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.18.3.tgz#86a0bba2d8ec3df860fefcc07a8d119779f01509"
+  integrity sha512-tReEhtMReZaPFVw7dajMx0vlsz3oOb8ajgPoHVYGxr8ErnZ6PcYEvvmjGmXlfpnxpkYSdOQttjB+MvVbCGfvLw==
+
 core-util-is@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
@@ -5911,6 +5957,14 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
+dom-helpers@^5.0.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-5.2.1.tgz#d9400536b2bf8225ad98fe052e029451ac40e902"
+  integrity sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==
+  dependencies:
+    "@babel/runtime" "^7.8.7"
+    csstype "^3.0.2"
+
 dom-serializer@0:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/dom-serializer/-/dom-serializer-0.2.2.tgz#1afb81f533717175d478655debc5e332d9f9bb51"
@@ -5986,6 +6040,15 @@ dotgitignore@^2.1.0:
   dependencies:
     find-up "^3.0.0"
     minimatch "^3.0.4"
+
+draft-js@0.11.7:
+  version "0.11.7"
+  resolved "https://registry.yarnpkg.com/draft-js/-/draft-js-0.11.7.tgz#be293aaa255c46d8a6647f3860aa4c178484a206"
+  integrity sha512-ne7yFfN4sEL82QPQEn80xnADR8/Q6ALVworbC5UOSzOvjffmYfFsr3xSZtxbIirti14R7Y33EZC5rivpLgIbsg==
+  dependencies:
+    fbjs "^2.0.0"
+    immutable "~3.7.4"
+    object-assign "^4.1.1"
 
 duplexer2@^0.1.2, duplexer2@~0.1.0, duplexer2@~0.1.2:
   version "0.1.4"
@@ -6825,6 +6888,20 @@ fbjs-css-vars@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/fbjs-css-vars/-/fbjs-css-vars-1.0.2.tgz#216551136ae02fe255932c3ec8775f18e2c078b8"
   integrity sha512-b2XGFAFdWZWg0phtAWLHCk836A1Xann+I+Dgd3Gk64MHKZO44FfoD1KxyvbSh0qZsIoXQGGlVztIY+oitJPpRQ==
+
+fbjs@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-2.0.0.tgz#01fb812138d7e31831ed3e374afe27b9169ef442"
+  integrity sha512-8XA8ny9ifxrAWlyhAbexXcs3rRMtxWcs3M0lctLfB49jRDHiaxj+Mo0XxbwE7nKZYzgCFoq64FS+WFd4IycPPQ==
+  dependencies:
+    core-js "^3.6.4"
+    cross-fetch "^3.0.4"
+    fbjs-css-vars "^1.0.0"
+    loose-envify "^1.0.0"
+    object-assign "^4.1.0"
+    promise "^7.1.1"
+    setimmediate "^1.0.5"
+    ua-parser-js "^0.7.18"
 
 fbjs@^3.0.0:
   version "3.0.0"
@@ -7823,7 +7900,7 @@ immer@9.0.6:
   resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.6.tgz#7a96bf2674d06c8143e327cbf73539388ddf1a73"
   integrity sha512-G95ivKpy+EvVAnAab4fVa4YGYn24J1SpEktnJX7JJ45Bd7xqME/SCplFzYFmTbrkwZbQ4xJK1xMTUYBkN6pWsQ==
 
-immutable@~3.7.6:
+immutable@~3.7.4, immutable@~3.7.6:
   version "3.7.6"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.7.6.tgz#13b4d3cb12befa15482a26fe1b2ebae640071e4b"
   integrity sha1-E7TTyxK++hVIKib+Gy665kAHHks=
@@ -9257,6 +9334,11 @@ media-typer@0.3.0:
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
 
+memoize-one@^5.0.0:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.2.1.tgz#8337aa3c4335581839ec01c3d594090cebe8f00e"
+  integrity sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==
+
 memory-fs@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/memory-fs/-/memory-fs-0.2.0.tgz#f2bb25368bc121e391c2520de92969caee0a0290"
@@ -10667,7 +10749,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.6.0, prop-types@^15.7.2:
+prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -10850,6 +10932,13 @@ react-i18next@^11.8.13:
     "@babel/runtime" "^7.14.5"
     html-parse-stringify "^3.0.1"
 
+react-input-autosize@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-3.0.0.tgz#6b5898c790d4478d69420b55441fcc31d5c50a85"
+  integrity sha512-nL9uS7jEs/zu8sqwFE5MAPx6pPkNAriACQ2rGLlqmKr2sPGtN7TXTyDdQt4lbNXVx7Uzadb40x8qotIuru6Rhg==
+  dependencies:
+    prop-types "^15.5.8"
+
 react-is@17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
@@ -10879,10 +10968,33 @@ react-refresh@0.8.3:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
 
+react-select@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-4.3.1.tgz#389fc07c9bc7cf7d3c377b7a05ea18cd7399cb81"
+  integrity sha512-HBBd0dYwkF5aZk1zP81Wx5UsLIIT2lSvAY2JiJo199LjoLHoivjn9//KsmvQMEFGNhe58xyuOITjfxKCcGc62Q==
+  dependencies:
+    "@babel/runtime" "^7.12.0"
+    "@emotion/cache" "^11.4.0"
+    "@emotion/react" "^11.1.1"
+    memoize-one "^5.0.0"
+    prop-types "^15.6.0"
+    react-input-autosize "^3.0.0"
+    react-transition-group "^4.3.0"
+
 react-three-fiber@0.0.0-deprecated:
   version "0.0.0-deprecated"
   resolved "https://registry.yarnpkg.com/react-three-fiber/-/react-three-fiber-0.0.0-deprecated.tgz#c737242487d824cf9520307308b7e4c4071a278f"
   integrity sha512-EblIqTAsIpkYeM8bZtC4lcpTE0A2zCEGipFB52RgcQq/q+0oryrk7Sxt+sqhIjUu6xMNEVywV8dr74lz5yWO6A==
+
+react-transition-group@^4.3.0:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.2.tgz#8b59a56f09ced7b55cbd53c36768b922890d5470"
+  integrity sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    dom-helpers "^5.0.1"
+    loose-envify "^1.4.0"
+    prop-types "^15.6.2"
 
 react-use-measure@^2.0.4:
   version "2.0.4"
