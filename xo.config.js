@@ -28,6 +28,7 @@ module.exports = {
 						objectLiteralTypeAssertions: "allow-as-parameter",
 					},
 				],
+				"@typescript-eslint/naming-convention": 0,
 				"react/prop-types": 0,
 				"react/display-name": 0,
 				"arrow-body-style": 0,
@@ -53,7 +54,8 @@ module.exports = {
 	],
 	prettier: true,
 	rules: {
-		"unicorn/prefer-node-protocol": 0,
 		"import/order": 0,
+		"unicorn/no-array-reduce": 0,
+		"unicorn/prefer-node-protocol": 0,
 	},
 };

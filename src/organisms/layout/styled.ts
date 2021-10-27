@@ -1,4 +1,5 @@
 import { pxToRem } from "@/ions/utils/unit";
+import { FieldsetRow } from "@dekk-ui/fieldset-row";
 import { focus } from "@dekk-ui/focus-ring";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -44,7 +45,7 @@ export const StyledButtonRow = styled.div`
 	`};
 `;
 
-export const StyledPressable = styled.button<{ indentLevel?: number }>`
+export const StyledPressable = styled.button<{ indentLevel?: number; selected?: boolean }>`
 	display: flex;
 	position: relative;
 	align-content: center;
@@ -53,6 +54,7 @@ export const StyledPressable = styled.button<{ indentLevel?: number }>`
 	width: 100%;
 	border: 0;
 	background: none;
+	box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
 	color: inherit;
 	font-family: inherit;
 	font-size: 1em;
@@ -73,16 +75,21 @@ export const StyledPressable = styled.button<{ indentLevel?: number }>`
 	}
 
 	&:hover {
-		background: rgba(0, 0, 0, 0.2);
+		background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
 	}
 
 	&:active {
-		background: rgba(0, 0, 0, 0.4);
+		background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
 	}
 
-	${({ theme, indentLevel = 0 }) => css`
+	${({ theme, indentLevel = 0, selected }) => css`
 		padding: ${pxToRem(theme.space.s)};
 		padding-left: ${pxToRem(theme.space.s * (indentLevel + 1))};
+		${selected &&
+		css`
+			background: ${theme.ui.colors.primary};
+			color: ${theme.ui.colors.lightest};
+		`};
 	`};
 `;
 
@@ -96,13 +103,18 @@ export const StyledBox = styled.div<{ isScrollable?: boolean; noSpaces?: boolean
 	`};
 `;
 
-export const StyledFieldRow = styled.div`
+export const StyledFieldRow = styled.div<{ fieldCount?: number }>`
 	display: grid;
-	grid-template-columns: 1fr 150px;
-	flex-grow: 1;
+	${({ theme, fieldCount = 1 }) => css`
+		grid-template-columns: 150px repeat(${fieldCount}, 1fr);
+		grid-gap: ${pxToRem(theme.space.s)};
+		padding: ${pxToRem(theme.space.s)};
+	`};
+`;
+
+export const StyledFieldsetRow = styled(FieldsetRow)`
 	${({ theme }) => css`
-		grid-gap: ${pxToRem(theme.space.xs)};
-		padding: ${pxToRem(theme.space.xs)} ${pxToRem(theme.space.s)};
+		padding: ${pxToRem(theme.space.s)};
 	`};
 `;
 
@@ -127,6 +139,7 @@ export const StyledLayoutWithLeftRight = styled(StyledLayout)`
 export const StyledHeader = styled.header`
 	display: flex;
 	grid-area: Header;
+	box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
 	${({ theme }) => css`
 		background: ${theme.ui.background["1"]};
 		color: ${theme.ui.text["1"]};
@@ -152,7 +165,7 @@ export const StyledRight = styled.aside`
 	flex-direction: column;
 	justify-content: flex-start;
 	height: 100%;
-	overflow: hidden;
+	overflow: auto;
 	${({ theme }) => css`
 		background: ${theme.ui.background["1"]};
 		color: ${theme.ui.text["1"]};
