@@ -49,12 +49,13 @@ export const Group: FC<GroupProps> = ({
 
 	const bind = useDrag(
 		({ event, down, movement: [mX, mY] }) => {
-			// Prevent dragging underlying objects
-			event.stopPropagation();
-			const moved = mX !== 0 && mY !== 0;
 			if (!draggable) {
 				return;
 			}
+
+			// Prevent dragging underlying objects
+			event.stopPropagation();
+			const moved = mX !== 0 && mY !== 0;
 
 			const nextX = x + mX;
 			const nextY = y + mY;

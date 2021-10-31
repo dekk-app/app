@@ -3,17 +3,20 @@ import { useEditor } from "@/ions/store/editor";
 import { Font, PictureEntity, TextEntity, useSpace } from "@/ions/store/space";
 import { findImageAspect } from "@/ions/utils/image";
 import { StyledFieldRow, StyledFieldsetRow } from "@/organisms/layout/styled";
+import { Button } from "@dekk-ui/button";
+import { Checkbox } from "@dekk-ui/checkbox";
 import { ColorInput } from "@dekk-ui/color-input-field";
 import { CombinedInput } from "@dekk-ui/combined-input-field";
 import { Icon } from "@dekk-ui/icon";
-import { NumberInput } from "@dekk-ui/input-field";
-import { StyledInput } from "@dekk-ui/input-field/styled";
+import { IconButton } from "@dekk-ui/icon-button";
+import { NumberInput, TextInput } from "@dekk-ui/input-field";
 import { InputLabel } from "@dekk-ui/input-label";
 import { MultiButton } from "@dekk-ui/multi-button";
 import { PopoutSelect, Select } from "@dekk-ui/select";
 import { ToggleButton } from "@dekk-ui/toggle-button";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useMemo, useState } from "react";
+import { v4 } from "uuid";
 
 export const SidebarRightText = () => {
 	const { t } = useTranslation(["editor", "menu"]);
@@ -64,7 +67,7 @@ export const SidebarRightText = () => {
 		<>
 			<StyledFieldsetRow>
 				<InputLabel htmlFor="editor:text">Text</InputLabel>
-				<StyledInput
+				<TextInput
 					fullWidth
 					id="editor:text"
 					as="textarea"
@@ -80,23 +83,22 @@ export const SidebarRightText = () => {
 					}}
 				/>
 			</StyledFieldsetRow>
-			<StyledFieldRow>
-				<InputLabel htmlFor="editor:x">Position X</InputLabel>
+			<StyledFieldRow fieldCount={2}>
+				<InputLabel htmlFor="editor:x">Position</InputLabel>
 				<CombinedInput
 					type="number"
 					startAdornment="X:"
+					textAlign="right"
 					id="editor:x"
 					value={entity.x}
 					onChange={x => {
 						updateTextEntity({ x }, activeEntity);
 					}}
 				/>
-			</StyledFieldRow>
-			<StyledFieldRow>
-				<InputLabel htmlFor="editor:x">Position Y</InputLabel>
 				<CombinedInput
 					type="number"
 					startAdornment="Y:"
+					textAlign="right"
 					id="editor:x"
 					value={entity.y}
 					onChange={y => {
@@ -105,10 +107,10 @@ export const SidebarRightText = () => {
 				/>
 			</StyledFieldRow>
 			<StyledFieldRow>
-				<InputLabel htmlFor="editor:width">Width</InputLabel>
+				<InputLabel htmlFor="editor:width">Size</InputLabel>
 				<CombinedInput
 					type="number"
-					endAdornment="pt"
+					startAdornment="W:"
 					textAlign="right"
 					id="editor:width"
 					value={entity.width}
@@ -120,7 +122,7 @@ export const SidebarRightText = () => {
 					}}
 				/>
 			</StyledFieldRow>
-			<StyledFieldsetRow>
+			<StyledFieldRow>
 				<InputLabel htmlFor="editor:fontFamily">Font</InputLabel>
 				<PopoutSelect
 					fullWidth
@@ -139,8 +141,8 @@ export const SidebarRightText = () => {
 						updateTextEntity({ font }, activeEntity);
 					}}
 				/>
-			</StyledFieldsetRow>
-			<StyledFieldsetRow>
+			</StyledFieldRow>
+			<StyledFieldRow>
 				<InputLabel htmlFor="editor:fontStyle">Style</InputLabel>
 				<PopoutSelect
 					fullWidth
@@ -163,7 +165,7 @@ export const SidebarRightText = () => {
 						updateTextEntity({ font }, activeEntity);
 					}}
 				/>
-			</StyledFieldsetRow>
+			</StyledFieldRow>
 			<StyledFieldRow fieldCount={2}>
 				<InputLabel htmlFor="editor:fontSize">Font Size</InputLabel>
 				<Select
@@ -182,6 +184,7 @@ export const SidebarRightText = () => {
 				<NumberInput
 					id="editor:fontSize"
 					value={entity.font.size}
+					textAlign="right"
 					onChange={size => {
 						updateTextEntity({ font: { size } }, activeEntity);
 					}}
@@ -208,6 +211,7 @@ export const SidebarRightText = () => {
 					min={0.5}
 					max={2}
 					step={0.1}
+					textAlign="right"
 					onChange={lineHeight => {
 						updateTextEntity({ lineHeight }, activeEntity);
 					}}
@@ -236,6 +240,7 @@ export const SidebarRightText = () => {
 					step={0.01}
 					min={-0.1}
 					max={0.5}
+					textAlign="right"
 					onChange={letterSpacing => {
 						updateTextEntity({ letterSpacing }, activeEntity);
 					}}
@@ -278,6 +283,64 @@ export const SidebarRightText = () => {
 					</ToggleButton>
 				</MultiButton>
 			</StyledFieldsetRow>
+			<StyledFieldsetRow>
+				<InputLabel as="legend">Anchor X</InputLabel>
+				<MultiButton fullWidth>
+					<ToggleButton
+						isSelected={entity.anchorX === "left"}
+						onClick={() => {
+							updateTextEntity({ anchorX: "left" }, activeEntity);
+						}}
+					>
+						<Icon icon="formatHorizontalAlignLeft" />
+					</ToggleButton>
+					<ToggleButton
+						isSelected={entity.anchorX === "center"}
+						onClick={() => {
+							updateTextEntity({ anchorX: "center" }, activeEntity);
+						}}
+					>
+						<Icon icon="formatHorizontalAlignCenter" />
+					</ToggleButton>
+					<ToggleButton
+						isSelected={entity.anchorX === "right"}
+						onClick={() => {
+							updateTextEntity({ anchorX: "right" }, activeEntity);
+						}}
+					>
+						<Icon icon="formatHorizontalAlignRight" />
+					</ToggleButton>
+				</MultiButton>
+			</StyledFieldsetRow>
+			<StyledFieldsetRow>
+				<InputLabel as="legend">Anchor Y</InputLabel>
+				<MultiButton fullWidth>
+					<ToggleButton
+						isSelected={entity.anchorY === "top"}
+						onClick={() => {
+							updateTextEntity({ anchorY: "top" }, activeEntity);
+						}}
+					>
+						<Icon icon="formatVerticalAlignTop" />
+					</ToggleButton>
+					<ToggleButton
+						isSelected={entity.anchorY === "middle"}
+						onClick={() => {
+							updateTextEntity({ anchorY: "middle" }, activeEntity);
+						}}
+					>
+						<Icon icon="formatVerticalAlignMiddle" />
+					</ToggleButton>
+					<ToggleButton
+						isSelected={entity.anchorY === "bottom"}
+						onClick={() => {
+							updateTextEntity({ anchorY: "bottom" }, activeEntity);
+						}}
+					>
+						<Icon icon="formatVerticalAlignBottom" />
+					</ToggleButton>
+				</MultiButton>
+			</StyledFieldsetRow>
 			<StyledFieldRow>
 				<InputLabel htmlFor="entity:color">{t("editor:color")}</InputLabel>
 				<ColorInput
@@ -303,7 +366,6 @@ export const SidebarRightPicture = () => {
 	useEffect(() => {
 		if (src) {
 			void findImageAspect(src).then(value => {
-				console.log(value);
 				setAspectRatio(value.aspectRatio);
 			});
 		}
@@ -317,13 +379,12 @@ export const SidebarRightPicture = () => {
 					alt="preview image"
 					style={{ width: "100%", marginBottom: "1rem" }}
 				/>
-				<StyledInput
+				<TextInput
 					fullWidth
 					id="editor:src"
 					as="textarea"
 					style={{
 						resize: "none",
-						width: "100%",
 						height: 100,
 						overflow: "auto",
 					}}
@@ -333,38 +394,38 @@ export const SidebarRightPicture = () => {
 					}}
 				/>
 			</StyledFieldsetRow>
-			<StyledFieldRow>
-				<InputLabel htmlFor="editor:x">Position X</InputLabel>
+			<StyledFieldRow fieldCount={2}>
+				<InputLabel htmlFor="editor:x">Position </InputLabel>
 				<CombinedInput
 					type="number"
 					startAdornment="X:"
+					textAlign="right"
 					id="editor:x"
 					value={entity.x}
 					onChange={x => {
 						updatePictureEntity({ x }, activeEntity);
 					}}
 				/>
-			</StyledFieldRow>
-			<StyledFieldRow>
-				<InputLabel htmlFor="editor:x">Position Y</InputLabel>
 				<CombinedInput
 					type="number"
 					startAdornment="Y:"
-					id="editor:x"
+					textAlign="right"
+					id="editor:y"
 					value={entity.y}
 					onChange={y => {
 						updatePictureEntity({ y }, activeEntity);
 					}}
 				/>
 			</StyledFieldRow>
-			<StyledFieldRow>
-				<InputLabel htmlFor="editor:width">Width</InputLabel>
+			<StyledFieldRow fieldCount={2}>
+				<InputLabel htmlFor="editor:width">Size</InputLabel>
 				<CombinedInput
 					fullWidth
 					type="number"
 					id="editor:width"
 					value={entity.width}
-					endAdornment="pt"
+					startAdornment="W:"
+					textAlign="right"
 					onChange={value => {
 						updatePictureEntity(
 							{ width: value, height: Math.round((value / aspectRatio) * 100) / 100 },
@@ -372,15 +433,13 @@ export const SidebarRightPicture = () => {
 						);
 					}}
 				/>
-			</StyledFieldRow>
-			<StyledFieldRow>
-				<InputLabel htmlFor="editor:height">Height</InputLabel>
 				<CombinedInput
 					fullWidth
 					type="number"
 					id="editor:height"
 					value={entity.height}
-					endAdornment="pt"
+					startAdornment="H:"
+					textAlign="right"
 					onChange={value => {
 						updatePictureEntity(
 							{ height: value, width: Math.round(value * aspectRatio * 100) / 100 },
@@ -438,6 +497,88 @@ export const SidebarRightSlice = () => {
 					}}
 				/>
 			</StyledFieldRow>
+			<div>
+				<StyledFieldRow>
+					<InputLabel htmlFor="slide:showGradient">{t("editor:showGradient")}</InputLabel>
+					<div
+						style={{
+							flex: 1,
+							display: "flex",
+							alignContent: "center",
+							alignItems: "center",
+						}}
+					>
+						<Checkbox
+							key={slice.id}
+							id="slide:showGradient"
+							checked={slice.showGradient}
+							onChange={checked => {
+								updateSlice({ showGradient: checked }, activeSlice);
+							}}
+						/>
+					</div>
+				</StyledFieldRow>
+				<div>
+					{slice.showGradient && (
+						<>
+							<StyledFieldRow>
+								<Button
+									onClick={() => {
+										const newStop = { id: v4(), stop: 1, color: "#000000" };
+										const newGradient = slice.gradient
+											? [...slice.gradient, newStop]
+											: [{ ...newStop, stop: 0 }];
+										updateSlice({ gradient: newGradient }, activeSlice);
+									}}
+								>
+									Add Stop
+								</Button>
+							</StyledFieldRow>
+							{slice.gradient?.map(stop => {
+								return (
+									<StyledFieldRow key={stop.id} fieldCount={2}>
+										<ColorInput
+											id={`slide:gradient.${stop.id}`}
+											defaultValue={stop.color}
+											onChange={event_ => {
+												const newGradient = slice.gradient.map(stop_ =>
+													stop_.id === stop.id
+														? { ...stop_, color: event_.target.value }
+														: stop_
+												);
+												updateSlice({ gradient: newGradient }, activeSlice);
+											}}
+										/>
+										<NumberInput
+											value={stop.stop}
+											step={0.01}
+											min={0}
+											max={1}
+											onChange={value => {
+												const newGradient = slice.gradient.map(stop_ =>
+													stop_.id === stop.id
+														? { ...stop_, stop: value }
+														: stop_
+												);
+												updateSlice({ gradient: newGradient }, activeSlice);
+											}}
+										/>
+										<IconButton
+											icon="deleteOutline"
+											onClick={() => {
+												const newGradient = slice.gradient.filter(
+													stop_ => stop_.id !== stop.id
+												);
+												updateSlice({ gradient: newGradient }, activeSlice);
+											}}
+										/>
+									</StyledFieldRow>
+								);
+							})}
+						</>
+					)}
+				</div>
+			</div>
 			<StyledFieldRow>
 				<InputLabel htmlFor="slide:color">{t("editor:color")}</InputLabel>
 				<ColorInput

@@ -27,7 +27,6 @@ const Background = () => {
 		<mesh
 			ref={ref}
 			onDoubleClick={() => {
-				console.log("hallo du da");
 				setActiveEntity(null);
 				setActiveSlice(null);
 			}}
@@ -36,6 +35,16 @@ const Background = () => {
 			<meshBasicMaterial attach="material" color={darkMode ? "#1d1d1d" : "#f7f7f8"} />
 		</mesh>
 	);
+};
+
+export const ViewportListener = () => {
+	const { getCurrentViewport } = useThree(state => state.viewport);
+	const setViewport = useEditor(state => state.setViewport);
+	useFrame(() => {
+		const { width, height } = getCurrentViewport();
+		setViewport({ width, height });
+	});
+	return null;
 };
 
 export const Main = () => {
@@ -55,6 +64,7 @@ export const Main = () => {
 		>
 			<Suspense fallback={null}>
 				<DarkModeListener />
+				<ViewportListener />
 				<Controls />
 				<Lights />
 				<Background />

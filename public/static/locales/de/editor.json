@@ -1,7 +1,9 @@
 {
   "add-slide": "Folie einfügen",
   "background": "Hintergrund",
+  "background-color": "Hintergrundfarbe",
   "color": "Textfarbe",
   "image": "Bild",
+  "3d-object": "3D Objekt",
   "text": "text"
 }

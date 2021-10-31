@@ -13,7 +13,10 @@ export interface Font {
 	weight?: FontWeight;
 	variant?: string;
 }
-export type EntityType = "text" | "picture" | "group";
+export type EntityType = "group" | "picture" | "text" | "3dObject";
+export type AnchorX = "center" | "left" | "right";
+export type AnchorY = "bottom" | "middle" | "top";
+export type TextAlign = "left" | "center" | "justify" | "right";
 
 export interface EntityGeneratedFields<T = EntityType> {
 	id: string;
@@ -24,9 +27,7 @@ export interface EntityFields {
 	x: number;
 	y: number;
 	z: number;
-	depth?: number;
 }
-export type TextAlign = "left" | "center" | "justify" | "right";
 
 export interface TextEntity extends EntityFields, EntityGeneratedFields<"text"> {
 	type: "text";
@@ -37,6 +38,8 @@ export interface TextEntity extends EntityFields, EntityGeneratedFields<"text"> 
 	textAlign: TextAlign;
 	lineHeight: number;
 	letterSpacing: number;
+	anchorX?: AnchorX;
+	anchorY?: AnchorY;
 }
 export type EditableTextEntityKeys =
 	| "text"
@@ -45,7 +48,9 @@ export type EditableTextEntityKeys =
 	| "lineHeight"
 	| "color"
 	| "width"
-	| "letterSpacing";
+	| "letterSpacing"
+	| "anchorX"
+	| "anchorY";
 
 export interface TextEntityUpdate
 	extends Partial<EntityFields>,
@@ -78,11 +83,19 @@ export interface SliceStopGeneratedFields {
 	entityIds: string[];
 }
 
+export interface GradientStop {
+	id: string;
+	color: string;
+	stop: number;
+}
+
 export interface SliceFields {
 	x: number;
 	y: number;
 	z: number;
 	backgroundColor?: string;
+	gradient: GradientStop[];
+	showGradient?: boolean;
 	color?: string;
 }
 
@@ -113,7 +126,9 @@ interface Store {
 	space: Space;
 	addTextEntity(input: TextEntityInput, parentId: string): void;
 	addPictureEntity(input: PictureEntityInput, parentId: string): void;
-	addSlice(input: SliceInput): void;
+	deleteEntity(id: string, parentId: string): void;
+	addSlice(input: SliceInput): Slice;
+	deleteSlice(id: string): void;
 	updateTextEntity(update: TextEntityUpdate, id: string): void;
 	updatePictureEntity(update: PictureEntityUpdate, id: string): void;
 	updateSlice(update: SliceUpdate, id: string): void;
@@ -127,10 +142,14 @@ const defaultEntity: TextEntity = {
 	z: 2,
 	type: "text",
 	__typename: "text",
-	text: "Text",
+	text: "Welcome to Dekk",
 	textAlign: "center",
 	lineHeight: 1.2,
 	letterSpacing: 0,
+	anchorX: "center",
+	anchorY: "middle",
+	width: 1200,
+	color: "#ffffff",
 	font: {
 		family: "Roboto",
 		size: 160,
@@ -147,6 +166,11 @@ const defaultSlice: Slice = {
 	z: 1,
 	entities: [defaultEntity],
 	entityIds: [defaultEntity.id],
+	showGradient: true,
+	gradient: [
+		{ id: "0", stop: 0, color: "#ff0000" },
+		{ id: "1", stop: 1, color: "#0000ff" },
+	],
 };
 
 const defaultSpace: Space = {
@@ -155,6 +179,23 @@ const defaultSpace: Space = {
 	height: 900,
 	backgroundColor: "#ffffff",
 	color: "#000000",
+};
+
+const merge = <T extends Record<string, any>>(original: T, update: Partial<T>): void => {
+	if (!original || !update) {
+		return;
+	}
+
+	for (const key in update) {
+		if (Object.prototype.hasOwnProperty.call(update, key)) {
+			const value = update[key];
+			if (typeof original[key] === "object") {
+				merge(original[key], value);
+			} else {
+				original[key] = value;
+			}
+		}
+	}
 };
 
 export const useSpace = create<Store>(set => ({
@@ -180,6 +221,9 @@ export const useSpace = create<Store>(set => ({
 					textAlign: "center",
 					lineHeight: 1.2,
 					letterSpacing: 0,
+					anchorX: "center",
+					anchorY: "middle",
+					width: 1200,
 					...input,
 					type: "text",
 					__typename: "text",
@@ -219,9 +263,10 @@ export const useSpace = create<Store>(set => ({
 		);
 	},
 	addSlice(input) {
+		let slice: Slice;
 		set(
 			produce<Store>(state => {
-				const sliceStep = state.space.width * 1.1;
+				const sliceStep = state.space.width * 1.5;
 				const rightMost = state.slices.reduce((previousValue, currentValue) => {
 					if (currentValue.x > previousValue.x) {
 						return currentValue;
@@ -234,42 +279,70 @@ export const useSpace = create<Store>(set => ({
 					z: 1,
 				};
 
-				const slice = {
+				const topMost = state.slices.reduce((previousValue, currentValue) => {
+					if (currentValue.z > previousValue) {
+						return currentValue.z;
+					}
+
+					return previousValue ?? currentValue.z;
+				}, state.slices[0]?.z ?? 0);
+
+				slice = {
 					x: rightMost.x + sliceStep,
 					y: rightMost.y,
-					z: rightMost.z,
+					z: topMost,
+					gradient: [],
+					showGradient: false,
 					...input,
 					id: v4(),
 					entities: [],
 					entityIds: [],
 				};
+
 				state.slices.push(slice);
+			})
+		);
+		return slice;
+	},
+	deleteEntity(id, parentId) {
+		set(
+			produce<Store>(state => {
+				const index = state.entities.findIndex(entity => entity.id === id);
+				if (index > -1) {
+					state.entities.splice(index, 1);
+					const slice = state.slices.find(slice => slice.id === parentId);
+					if (slice) {
+						const entityIndex = slice.entities.findIndex(entity => entity.id === id);
+						const entityIdIndex = slice.entityIds.indexOf(id);
+						slice.entities.splice(entityIndex, 1);
+						slice.entityIds.splice(entityIdIndex, 0);
+					}
+				}
+			})
+		);
+	},
+	deleteSlice(id: string) {
+		set(
+			produce<Store>(state => {
+				const index = state.slices.findIndex(slice => slice.id === id);
+				if (index > -1) {
+					state.slices.splice(index, 1);
+				}
 			})
 		);
 	},
 	updateTextEntity(update, id) {
-		const runUpdate = (entity: TextEntity | PictureEntity) => {
-			if (entity && entity.__typename === "text") {
-				for (const key in update) {
-					if (key === "font") {
-						for (const fontKey in update.font) {
-							if (Object.prototype.hasOwnProperty.call(update.font, fontKey)) {
-								entity.font[fontKey] =
-									update.font[fontKey as keyof typeof update.font];
-							}
-						}
-					} else {
-						entity[key] = update[key as keyof typeof update];
-					}
-				}
-			}
-		};
-
 		set(
 			produce<Store>(state => {
-				runUpdate(state.entities.find(item => item.id === id));
+				merge(
+					state.entities.find(item => item.id === id),
+					update
+				);
 				for (const slice of state.slices) {
-					runUpdate(slice.entities.find(item => item.id === id));
+					merge(
+						slice.entities.find(item => item.id === id),
+						update
+					);
 				}
 			})
 		);
@@ -277,24 +350,15 @@ export const useSpace = create<Store>(set => ({
 	updatePictureEntity(update, id) {
 		set(
 			produce<Store>(state => {
-				const entity = state.entities.find(item => item.id === id);
-				if (entity) {
-					for (const key in update) {
-						if (Object.prototype.hasOwnProperty.call(update, key)) {
-							entity[key] = update[key as keyof typeof update];
-						}
-					}
-				}
-
+				merge(
+					state.entities.find(item => item.id === id),
+					update
+				);
 				for (const slice of state.slices) {
-					const entity = slice.entities.find(item => item.id === id);
-					if (entity) {
-						for (const key in update) {
-							if (Object.prototype.hasOwnProperty.call(update, key)) {
-								entity[key] = update[key as keyof typeof update];
-							}
-						}
-					}
+					merge(
+						slice.entities.find(item => item.id === id),
+						update
+					);
 				}
 			})
 		);
@@ -302,25 +366,17 @@ export const useSpace = create<Store>(set => ({
 	updateSlice(update, id) {
 		set(
 			produce<Store>(state => {
-				const slice = state.slices.find(item => item.id === id);
-				if (slice) {
-					for (const key in update) {
-						if (Object.prototype.hasOwnProperty.call(update, key)) {
-							slice[key] = update[key as keyof typeof update];
-						}
-					}
-				}
+				merge(
+					state.slices.find(item => item.id === id),
+					update
+				);
 			})
 		);
 	},
 	updateSpace(update) {
 		set(
 			produce<Store>(state => {
-				for (const key in update) {
-					if (Object.prototype.hasOwnProperty.call(update, key)) {
-						state.space[key] = update[key as keyof typeof update];
-					}
-				}
+				merge(state.space, update);
 			})
 		);
 	},

@@ -34,11 +34,12 @@ export const PictureEntity = ({
 	const activeEntity = useEditor(state => state.activeEntity);
 	const activeSlice = useEditor(state => state.activeSlice);
 	const isActive = activeEntity === id;
+	const isActiveSlice = activeSlice === slice.id;
 	const { height: spaceHeight, width: spaceWidth } = space;
 
 	return (
 		<Group
-			draggable
+			draggable={isActiveSlice}
 			x={x}
 			y={y}
 			z={z}

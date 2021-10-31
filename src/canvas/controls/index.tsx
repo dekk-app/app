@@ -13,26 +13,21 @@ export const Controls = () => {
 	const { getCurrentViewport } = useThree(state => state.viewport);
 	const setZoom = useEditor(state => state.setZoom);
 	const { domElement } = useThree(state => state.gl);
+	const setControls = useEditor(state => state.setControls);
 	const controllable = useEditor(state => state.controllable);
 	const controls = useMemo(() => new CameraControls(camera, domElement), [camera, domElement]);
-	const activeSlice = useEditor(state => state.activeSlice);
 	useEffect(() => {
-		if (activeSlice) {
-			const slice = useSpace.getState().slices.find(({ id }) => id === activeSlice);
-			const zoom = useEditor.getState().zoom;
-			const space = useSpace.getState().space;
-			const viewport = getCurrentViewport();
-			void controls.moveTo(slice.x, slice.y, 0);
-			void controls.zoomTo((viewport.width * zoom) / space.width);
-		}
-	}, [activeSlice, getCurrentViewport, controls]);
+		setControls(controls);
+	}, [controls, setControls]);
 
 	useEffect(() => {
 		const viewport = getCurrentViewport();
-		const zoom = useEditor.getState().zoom;
 		const space = useSpace.getState().space;
-
-		void controls.zoomTo((viewport.width * zoom) / space.width);
+		const [firstSlice] = useSpace.getState().slices;
+		if (firstSlice) {
+			void controls.moveTo(firstSlice.x, firstSlice.y, firstSlice.z);
+			void controls.zoomTo((viewport.width * controls.camera.zoom - 200) / space.width);
+		}
 	}, [controls, getCurrentViewport]);
 
 	useEffect(() => {

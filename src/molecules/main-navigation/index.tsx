@@ -8,6 +8,7 @@ import React, { memo } from "react";
 
 export const StyledNav = styled.nav`
 	display: block;
+	flex: 1;
 	width: 100%;
 `;
 

@@ -16,21 +16,12 @@ export const StyledLayout = styled.div`
 export const StyledCentered = styled.div`
 	display: flex;
 	flex-direction: column;
-	flex-grow: 1;
 	align-content: center;
 	align-items: center;
 	width: 100%;
 	${({ theme }) => css`
 		padding: ${pxToRem(theme.space.s)};
 	`};
-`;
-
-export const StyledCenteredRow = styled.div`
-	display: flex;
-	flex-grow: 1;
-	align-content: center;
-	align-items: center;
-	justify-content: center;
 `;
 
 export const StyledButtonRow = styled.div`
@@ -45,16 +36,17 @@ export const StyledButtonRow = styled.div`
 	`};
 `;
 
-export const StyledPressable = styled.button<{ indentLevel?: number; selected?: boolean }>`
+export const StyledPressable = styled.button<{ indentLevel?: number; isSelected?: boolean }>`
 	display: flex;
 	position: relative;
+	z-index: 0;
 	align-content: center;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
 	border: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	background: none;
-	box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
 	color: inherit;
 	font-family: inherit;
 	font-size: 1em;
@@ -67,10 +59,12 @@ export const StyledPressable = styled.button<{ indentLevel?: number; selected?: 
 	&:focus-visible::before {
 		content: "";
 		position: absolute;
+		z-index: 2;
 		top: 2px;
 		right: 2px;
 		bottom: 2px;
 		left: 2px;
+		border-radius: inherit;
 		${focus};
 	}
 
@@ -82,10 +76,43 @@ export const StyledPressable = styled.button<{ indentLevel?: number; selected?: 
 		background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
 	}
 
-	${({ theme, indentLevel = 0, selected }) => css`
-		padding: ${pxToRem(theme.space.s)};
+	${({ theme, indentLevel = 0, isSelected }) => css`
+		padding: ${pxToRem(theme.space.s)} ${pxToRem(theme.space.xs)};
 		padding-left: ${pxToRem(theme.space.s * (indentLevel + 1))};
-		${selected &&
+		${isSelected &&
+		css`
+			background: ${theme.ui.colors.primary};
+			color: ${theme.ui.colors.lightest};
+		`};
+	`};
+`;
+
+export const StyledBackgroundPressable = styled(StyledPressable)`
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+`;
+
+export const StyledExpandable = styled.div<{ indentLevel?: number; isSelected?: boolean }>`
+	display: flex;
+	position: relative;
+	z-index: 0;
+	align-content: center;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	background: none;
+	color: inherit;
+	font-family: inherit;
+	font-size: 1em;
+	text-align: left;
+	${({ theme, indentLevel = 0, isSelected }) => css`
+		padding: ${pxToRem(theme.space.s)} ${pxToRem(theme.space.xs)};
+		padding-left: ${pxToRem(theme.space.xs * (indentLevel + 1))};
+		${isSelected &&
 		css`
 			background: ${theme.ui.colors.primary};
 			color: ${theme.ui.colors.lightest};
@@ -105,14 +132,16 @@ export const StyledBox = styled.div<{ isScrollable?: boolean; noSpaces?: boolean
 
 export const StyledFieldRow = styled.div<{ fieldCount?: number }>`
 	display: grid;
+	position: relative;
 	${({ theme, fieldCount = 1 }) => css`
-		grid-template-columns: 150px repeat(${fieldCount}, 1fr);
+		grid-template-columns: 100px repeat(${fieldCount}, 1fr);
 		grid-gap: ${pxToRem(theme.space.s)};
 		padding: ${pxToRem(theme.space.s)};
 	`};
 `;
 
 export const StyledFieldsetRow = styled(FieldsetRow)`
+	position: relative;
 	${({ theme }) => css`
 		padding: ${pxToRem(theme.space.s)};
 	`};

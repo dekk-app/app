@@ -23,6 +23,8 @@ export const DeckEditor = () => {
 	const activeEntity = useEditor(state => state.activeEntity);
 	const entities = useSpace(state => state.entities);
 	const entity = entities.find(({ id }) => id === activeEntity);
+	const slices = useSpace(state => state.slices);
+	const slice = slices.find(({ id }) => id === activeSlice);
 
 	return (
 		<StyledLayoutWithLeftRight>
@@ -37,7 +39,7 @@ export const DeckEditor = () => {
 				<Main />
 			</StyledMain>
 			<StyledRight>
-				{!entity && activeSlice && <SidebarRightSlice />}
+				{!entity && slice && <SidebarRightSlice />}
 				{entity?.type === "text" && <SidebarRightText />}
 				{entity?.type === "picture" && <SidebarRightPicture />}
 			</StyledRight>

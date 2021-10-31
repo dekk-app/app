@@ -1,5 +1,6 @@
 import { PictureEntity } from "@/canvas/entities/picture";
 import { TextEntity } from "@/canvas/entities/text";
+import { GradientTexture } from "@/canvas/gradient";
 import { Group } from "@/canvas/group";
 import { useEditor } from "@/ions/store/editor";
 import { Slice as SliceType, useSpace } from "@/ions/store/space";
@@ -8,7 +9,7 @@ import React, { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 
 export const Slice = (slice: SliceType) => {
-	const { backgroundColor, color, entities, id, x, y, z } = slice;
+	const { backgroundColor, gradient, showGradient, color, entities, id, x, y, z } = slice;
 	const { width, height, ...space } = useSpace(state => state.space);
 	const slices = useSpace(state => state.slices);
 	const updateSlice = useSpace(state => state.updateSlice);
@@ -25,7 +26,6 @@ export const Slice = (slice: SliceType) => {
 		],
 		[width, height]
 	);
-
 	const clipPlanes = useRef([
 		new THREE.Plane(new THREE.Vector3(0, 1, 0), -y + height / 2),
 		new THREE.Plane(new THREE.Vector3(0, -1, 0), y + height / 2),
@@ -39,6 +39,7 @@ export const Slice = (slice: SliceType) => {
 		new THREE.Plane(new THREE.Vector3(-1, 0, 0), x - width / 2),
 	]);
 
+	const isActive = activeSlice === id;
 	useEffect(() => {
 		clipPlanes.current[0].constant = -y + height / 2;
 		clipPlanes.current[1].constant = y + height / 2;
@@ -57,7 +58,7 @@ export const Slice = (slice: SliceType) => {
 			y={y}
 			z={z}
 			id={id}
-			showHelper={activeSlice === id}
+			showHelper={isActive}
 			helperColor="#ab32ba"
 			siblings={slices.flatMap(({ x, y, id }) => [
 				{ x, y, id },
@@ -86,10 +87,25 @@ export const Slice = (slice: SliceType) => {
 		>
 			<mesh>
 				<planeBufferGeometry attach="geometry" args={[width, height]} />
-				<meshBasicMaterial
-					attach="material"
-					color={backgroundColor ?? space.backgroundColor}
-				/>
+				<meshBasicMaterial attach="material" depthWrite={!showGradient}>
+					<GradientTexture
+						stops={showGradient ? gradient.map(({ stop }) => stop) : [0, 1]}
+						x1={0}
+						x2={width}
+						y1={0}
+						y2={height}
+						height={height}
+						width={width}
+						colors={
+							showGradient
+								? gradient.map(({ color }) => color)
+								: [
+										backgroundColor ?? space.backgroundColor,
+										backgroundColor ?? space.backgroundColor,
+								  ]
+						}
+					/>
+				</meshBasicMaterial>
 			</mesh>
 
 			{entities.map((entity, index) => {
