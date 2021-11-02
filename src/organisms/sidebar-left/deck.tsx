@@ -1,99 +1,91 @@
 import { DarkModeListener } from "@/canvas/dark-mode";
 import { PreviewSlice } from "@/canvas/slice/preview-slice";
 import { useEditor } from "@/ions/store/editor";
-import { useSpace } from "@/ions/store/space";
+import { PictureEntity, Slice, TextEntity, useSpace } from "@/ions/store/space";
 import { pxToRem } from "@/ions/utils/unit";
 import {
 	StyledBackgroundPressable,
-	StyledExpandable,
 	StyledPressable,
+	StyledTreeItem,
 } from "@/organisms/layout/styled";
-import { focus } from "@dekk-ui/focus-ring";
+import {
+	StyledHandle,
+	StyledIconWrapper,
+	StyledList,
+	StyledListItem,
+	StyledPressableLabel,
+	StyledPreviewPressable,
+} from "@/organisms/sidebar-left/styled";
 import { Icon } from "@dekk-ui/icon";
 import { IconButton } from "@dekk-ui/icon-button";
-import { css } from "@emotion/react";
+import {
+	closestCenter,
+	DndContext,
+	KeyboardSensor,
+	PointerSensor,
+	useSensor,
+	useSensors,
+} from "@dnd-kit/core";
+import { DragEndEvent } from "@dnd-kit/core/dist/types";
+import {
+	SortableContext,
+	sortableKeyboardCoordinates,
+	useSortable,
+	verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import styled from "@emotion/styled";
 import { Canvas } from "@react-three/fiber";
 import { useTranslation } from "next-i18next";
-import React, { Suspense, useCallback, useState } from "react";
+import React, {
+	CSSProperties,
+	FC,
+	MouseEventHandler,
+	Suspense,
+	useCallback,
+	useState,
+} from "react";
 
-export const StyledList = styled.ul`
-	flex: 1;
-	margin: 0;
-	padding: 0;
-	overflow: auto;
-	list-style: none;
-`;
-
-export const StyledListItem = styled.li`
-	margin: 0;
-	padding: 0;
-	list-style: none;
-`;
-
-export const StyledPressableLabel = styled.div`
-	position: relative;
-	z-index: 1;
-	flex: 1;
+const StyledListItemContent = styled.div`
 	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	pointer-events: none;
-	${({ theme }) => css`
-		padding: 0 ${pxToRem(theme.space.xs)};
-	`};
 `;
+export const Sortable: FC<{ id: string }> = ({ children, id }) => {
+	const {
+		attributes: { tabIndex, ...attributes },
+		listeners,
+		setNodeRef,
+		transform,
+		transition,
+		active,
+	} = useSortable({
+		id,
+	});
+	const isActive = active?.id === id;
+	const style: CSSProperties = {
+		transform: transform ? `translate3d(0,${pxToRem(transform.y)},0)` : `translate3d(0,0,0)`,
+		transition,
+	};
 
-export const StyledPreviewPressable = styled(StyledPressable)`
-	width: ${pxToRem(80)};
-	min-width: ${pxToRem(80)};
-	max-width: ${pxToRem(80)};
-	height: ${pxToRem(45)};
-	padding: 0;
-	border-bottom: 0;
-	box-shadow: 0 0 0 1px currentColor;
-
-	&:focus-visible::before {
-		content: "";
-		position: absolute;
-		z-index: 2;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		border-radius: inherit;
-		${focus};
-	}
-
-	${({ theme }) => css`
-		margin-left: ${pxToRem(theme.space.xs)};
-		border-radius: ${pxToRem(theme.radius.s)};
-		canvas {
-			border-radius: ${pxToRem(theme.radius.s)};
-		}
-	`};
-`;
-
-const StyledIconWrapper = styled.div`
-	position: relative;
-`;
-
-export const SidebarLeft = () => {
-	const { t } = useTranslation(["editor"]);
-	const addSlice = useSpace(state => state.addSlice);
-	const slices = useSpace(state => state.slices);
-	const deleteEntity = useSpace(state => state.deleteEntity);
-	const deleteSlice = useSpace(state => state.deleteSlice);
-	const controls = useEditor(state => state.controls);
-	const activeSlice = useEditor(state => state.activeSlice);
-	const activeEntity = useEditor(state => state.activeEntity);
-	const setActiveEntity = useEditor(state => state.setActiveEntity);
-	const setActiveSlice = useEditor(state => state.setActiveSlice);
-	const [expandedSlices, setExpandedSlices] = useState(
-		Object.fromEntries(slices.map(currentValue => [currentValue.id, false]))
+	return (
+		<StyledListItem ref={setNodeRef} style={style} {...attributes}>
+			<StyledHandle>
+				<IconButton icon="dragVertical" {...listeners} isSelected={isActive} />
+			</StyledHandle>
+			<StyledListItemContent>{children}</StyledListItemContent>
+		</StyledListItem>
 	);
+};
 
-	const moveToSlice = useCallback(
+export const useSlice = () => {
+	const slices = useSpace(state => state.slices);
+	const activeSlice = useEditor(state => state.activeSlice);
+
+	return slices.find(({ id }) => id === activeSlice);
+};
+
+export const useMoveToSlice = () => {
+	const controls = useEditor(state => state.controls);
+
+	return useCallback(
 		(
 			{ x, y, enableTransition }: { x: number; y: number; enableTransition?: boolean },
 			padding = 100
@@ -107,6 +99,176 @@ export const SidebarLeft = () => {
 			);
 		},
 		[controls]
+	);
+};
+
+const Preview = ({ slice }: { slice: Slice }) => {
+	const setActiveEntity = useEditor(state => state.setActiveEntity);
+	const setActiveSlice = useEditor(state => state.setActiveSlice);
+	const moveToSlice = useMoveToSlice();
+
+	return (
+		<StyledPreviewPressable
+			onClick={event_ => {
+				event_.stopPropagation();
+				moveToSlice({
+					x: slice.x,
+					y: slice.y,
+				});
+				setActiveSlice(slice.id);
+				setActiveEntity(null);
+			}}
+		>
+			<Canvas
+				flat
+				orthographic
+				camera={{
+					position: [0, 0, 1000],
+					zoom: 0.05,
+				}}
+				onCreated={({ gl, setDpr }) => {
+					gl.localClippingEnabled = true;
+					setDpr(window.devicePixelRatio);
+				}}
+			>
+				<Suspense fallback={null}>
+					<DarkModeListener />
+					<PreviewSlice key={slice.id} {...slice} />
+				</Suspense>
+			</Canvas>
+		</StyledPreviewPressable>
+	);
+};
+
+const SortableEntity: FC<{ entity: TextEntity | PictureEntity; sliceId: Slice["id"] }> = ({
+	entity,
+	sliceId,
+}) => {
+	const deleteEntity = useSpace(state => state.deleteEntity);
+	const setActiveEntity = useEditor(state => state.setActiveEntity);
+	const setActiveSlice = useEditor(state => state.setActiveSlice);
+	const activeEntity = useEditor(state => state.activeEntity);
+	const isActive = entity.id === activeEntity;
+	return (
+		<Sortable key={entity.id} id={entity.id}>
+			<StyledTreeItem isSelected={isActive} indentLevel={2}>
+				<StyledBackgroundPressable
+					isSelected={isActive}
+					onClick={event_ => {
+						event_.stopPropagation();
+						setActiveSlice(sliceId);
+						setActiveEntity(entity.id);
+					}}
+				/>
+				<StyledIconWrapper>
+					<Icon icon={entity.type === "text" ? "formatText" : "imageOutline"} />
+				</StyledIconWrapper>
+				<StyledPressableLabel>{entity.id}</StyledPressableLabel>
+				<IconButton
+					icon="dotsVertical"
+					onClick={event_ => {
+						event_.stopPropagation();
+						deleteEntity(entity.id, sliceId);
+					}}
+				/>
+			</StyledTreeItem>
+		</Sortable>
+	);
+};
+
+export const SortableSlice: FC<{
+	isActive?: boolean;
+	isExpanded?: boolean;
+	slice: Slice;
+	onExpand?: MouseEventHandler<HTMLButtonElement>;
+}> = ({ isActive, isExpanded, slice, onExpand }) => {
+	const deleteSlice = useSpace(state => state.deleteSlice);
+	const setActiveEntity = useEditor(state => state.setActiveEntity);
+	const setActiveSlice = useEditor(state => state.setActiveSlice);
+	return (
+		<Sortable key={slice.id} id={slice.id}>
+			<StyledTreeItem isSelected={isActive}>
+				<StyledBackgroundPressable
+					isSelected={isActive}
+					onClick={event_ => {
+						event_.stopPropagation();
+						setActiveSlice(slice.id);
+						setActiveEntity(null);
+					}}
+				/>
+				<IconButton icon={isExpanded ? "chevronUp" : "chevronDown"} onClick={onExpand} />
+				<Preview slice={slice} />
+				<StyledPressableLabel>{slice.id}</StyledPressableLabel>
+				<IconButton
+					icon="dotsVertical"
+					onClick={event_ => {
+						event_.stopPropagation();
+						deleteSlice(slice.id);
+					}}
+				/>
+			</StyledTreeItem>
+			{isExpanded && (
+				<StyledList>
+					<SortableContext
+						items={slice.entityIds}
+						id="sortable:entities"
+						strategy={verticalListSortingStrategy}
+					>
+						{slice.entities.map(entity => {
+							return (
+								<SortableEntity
+									key={entity.id}
+									entity={entity}
+									sliceId={slice.id}
+								/>
+							);
+						})}
+					</SortableContext>
+				</StyledList>
+			)}
+		</Sortable>
+	);
+};
+
+export const SidebarLeft = () => {
+	const { t } = useTranslation(["editor"]);
+	const addSlice = useSpace(state => state.addSlice);
+	const slices = useSpace(state => state.slices);
+	const moveSlice = useSpace(state => state.moveSlice);
+	const moveEntity = useSpace(state => state.moveEntity);
+	const activeSlice = useEditor(state => state.activeSlice);
+	const setActiveEntity = useEditor(state => state.setActiveEntity);
+	const setActiveSlice = useEditor(state => state.setActiveSlice);
+	const moveToSlice = useMoveToSlice();
+	const [expandedSlices, setExpandedSlices] = useState(
+		Object.fromEntries(slices.map(currentValue => [currentValue.id, false]))
+	);
+
+	const sensors = useSensors(
+		useSensor(PointerSensor),
+		useSensor(KeyboardSensor, {
+			coordinateGetter: sortableKeyboardCoordinates,
+		})
+	);
+
+	const handleDragEnd = useCallback(
+		(event_: DragEndEvent) => {
+			const { active, over } = event_;
+
+			if (active.id !== over.id) {
+				switch (active.data.current.sortable.containerId) {
+					case "sortable:slices":
+						moveSlice(active.id, over.id);
+						break;
+					case "sortable:entities":
+						moveEntity(active.id, over.id);
+						break;
+					default:
+						break;
+				}
+			}
+		},
+		[moveSlice, moveEntity]
 	);
 
 	return (
@@ -126,23 +288,25 @@ export const SidebarLeft = () => {
 				<Icon icon="plus" />
 			</StyledPressable>
 			<StyledList>
-				{slices.map((slice, sliceIndex) => {
-					const isActiveSlice = slice.id === activeSlice;
-					const isSliceExpanded = Boolean(expandedSlices[slice.id]);
-					return (
-						<StyledListItem key={slice.id}>
-							<StyledExpandable isSelected={isActiveSlice}>
-								<StyledBackgroundPressable
-									isSelected={isActiveSlice}
-									onClick={event_ => {
-										event_.stopPropagation();
-										setActiveSlice(slice.id);
-										setActiveEntity(null);
-									}}
-								/>
-								<IconButton
-									icon={isSliceExpanded ? "chevronUp" : "chevronDown"}
-									onClick={event_ => {
+				<DndContext
+					id="sortable:context"
+					sensors={sensors}
+					collisionDetection={closestCenter}
+					onDragEnd={handleDragEnd}
+				>
+					<SortableContext
+						items={slices.map(({ id }) => id)}
+						id="sortable:slices"
+						strategy={verticalListSortingStrategy}
+					>
+						{slices.map(slice => {
+							return (
+								<SortableSlice
+									key={slice.id}
+									isExpanded={Boolean(expandedSlices[slice.id])}
+									isActive={slice.id === activeSlice}
+									slice={slice}
+									onExpand={event_ => {
 										event_.stopPropagation();
 										setExpandedSlices(previousState => ({
 											...previousState,
@@ -150,90 +314,10 @@ export const SidebarLeft = () => {
 										}));
 									}}
 								/>
-								<StyledPreviewPressable
-									onClick={event_ => {
-										event_.stopPropagation();
-										moveToSlice({
-											x: slice.x,
-											y: slice.y,
-										});
-										setActiveSlice(slice.id);
-										setActiveEntity(null);
-									}}
-								>
-									<Canvas
-										flat
-										orthographic
-										camera={{
-											position: [0, 0, 1000],
-											zoom: 0.05,
-										}}
-										onCreated={({ gl, setDpr }) => {
-											gl.localClippingEnabled = true;
-											setDpr(window.devicePixelRatio);
-										}}
-									>
-										<Suspense fallback={null}>
-											<DarkModeListener />
-											<PreviewSlice key={slice.id} {...slice} />
-										</Suspense>
-									</Canvas>
-								</StyledPreviewPressable>
-								<StyledPressableLabel>Slide {sliceIndex + 1}</StyledPressableLabel>
-								<IconButton
-									icon="deleteOutline"
-									onClick={event_ => {
-										event_.stopPropagation();
-										deleteSlice(slice.id);
-									}}
-								/>
-							</StyledExpandable>
-							{isSliceExpanded && (
-								<StyledList>
-									{slice.entities.map((entity, entityIndex) => {
-										const isActiveEntity = entity.id === activeEntity;
-										return (
-											<StyledListItem key={`${slice.id}_${entity.id}`}>
-												<StyledExpandable
-													isSelected={isActiveEntity}
-													indentLevel={2}
-												>
-													<StyledBackgroundPressable
-														isSelected={isActiveEntity}
-														onClick={event_ => {
-															event_.stopPropagation();
-															setActiveSlice(slice.id);
-															setActiveEntity(entity.id);
-														}}
-													/>
-													<StyledIconWrapper>
-														<Icon
-															icon={
-																entity.type === "text"
-																	? "formatText"
-																	: "imageOutline"
-															}
-														/>
-													</StyledIconWrapper>
-													<StyledPressableLabel>
-														Layer {entityIndex + 1}
-													</StyledPressableLabel>
-													<IconButton
-														icon="deleteOutline"
-														onClick={event_ => {
-															event_.stopPropagation();
-															deleteEntity(entity.id, slice.id);
-														}}
-													/>
-												</StyledExpandable>
-											</StyledListItem>
-										);
-									})}
-								</StyledList>
-							)}
-						</StyledListItem>
-					);
-				})}
+							);
+						})}
+					</SortableContext>
+				</DndContext>
 			</StyledList>
 		</>
 	);

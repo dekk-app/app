@@ -1406,192 +1406,225 @@
     reflect-metadata "^0.1.13"
     type-graphql "^1.1.1"
 
-"@dekk-ui/avatar@0.7.0", "@dekk-ui/avatar@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/avatar/-/avatar-0.7.0.tgz#cdd3249595368a622803abcaf82ba40443521e5e"
-  integrity sha512-MNwOb5TsgL632k3S6G8Wqu21Izm54Jizuz+vS9LT60WxZuLqb15QI0of2PDUH6kI71AGEXXBp7/SWpu7l5rz1w==
+"@dekk-ui/avatar@0.8.0", "@dekk-ui/avatar@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/avatar/-/avatar-0.8.0.tgz#cd22e03b2081c1a8cae85129fefc46b329830a06"
+  integrity sha512-+pXkz4FcLlM/SfLX92rTG5c2VMFdzJsmogPhOlaQfOHFGIFprSKNkpNdEF9pIXXnr+GXqv4aGhe3KXq7q2w5XQ==
   dependencies:
     "@babel/runtime" "^7.15.4"
-    "@dekk-ui/theme" "^0.7.0"
-    "@dekk-ui/utils" "^0.7.0"
+    "@dekk-ui/theme" "^0.8.0"
+    "@dekk-ui/utils" "^0.8.0"
 
-"@dekk-ui/button@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/button/-/button-0.7.0.tgz#c9bbb8a74d0afecade120ee6ac07009fc7755f69"
-  integrity sha512-aDXNNJhzP1BaAGyh4yY6rO2+BwQDZY3ptqoYhmlser199KRE2QIepXEqfwwnfG14M62jWw2vswangVKQ+25gZQ==
+"@dekk-ui/button@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/button/-/button-0.8.0.tgz#13147d15b46c394ce86643f5c988c2f6ce3f2aa6"
+  integrity sha512-tjcc1baQsi9gmBXkU9/QwhJFy0E7qnCa36VkJQNIf0Ud5zXVmPkl7Zsz740z5UEV/lFC8GmAS8N9YDaMROhMwg==
   dependencies:
-    "@dekk-ui/focus-ring" "^0.7.0"
-    "@dekk-ui/theme" "^0.7.0"
-    "@dekk-ui/utils" "^0.7.0"
+    "@dekk-ui/focus-ring" "^0.8.0"
+    "@dekk-ui/theme" "^0.8.0"
+    "@dekk-ui/utils" "^0.8.0"
 
-"@dekk-ui/checkbox@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/checkbox/-/checkbox-0.7.0.tgz#63306368618b823dad73e9a8b7921dd046d1d7f3"
-  integrity sha512-N1iuRjtecXYfgZoXi/SLvUnZEsosdF6whlk5N7GOYem5ek66QKq+sGBdkQeSXaUlpV4BSCKiMhOSBckfErezMg==
+"@dekk-ui/checkbox@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/checkbox/-/checkbox-0.8.0.tgz#8f4a4ebd8fc84b71deff115bfdc73a40ba256cdd"
+  integrity sha512-H2OCQroPV4k5GGXHU8M922Dnujlhi6NAC49O/B+XH4sVww58BrPX/zVOyrcm+plub7J3lISS/XFBTh7385hQ9g==
   dependencies:
-    "@dekk-ui/focus-ring" "^0.7.0"
-    "@dekk-ui/theme" "^0.7.0"
-    "@dekk-ui/utils" "^0.7.0"
+    "@dekk-ui/focus-ring" "^0.8.0"
+    "@dekk-ui/theme" "^0.8.0"
+    "@dekk-ui/utils" "^0.8.0"
     type-fest "^2.3.3"
 
-"@dekk-ui/color-input-field@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/color-input-field/-/color-input-field-0.7.0.tgz#9466b4645bdb1e0a6f3d85f2f012c6398d35b2a8"
-  integrity sha512-RtRTzjy+SOOt0kOFZ6QftqSL5Ihu5w5gBiubAHkxUjch2t20n0RpbMUdJ42Dec9o4oMIuqm1ZxeDgdGlDqqaQg==
+"@dekk-ui/color-input-field@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/color-input-field/-/color-input-field-0.8.0.tgz#86edb5e181e2b4e3a81675a255e7693a44515d3d"
+  integrity sha512-C5tYLc6Fpu7awuK/+LX++yR4B3DGt2DMKH3G3GpnOxc4rtQNHqlpPwW/vhK85s2Regm7kgiy0ztjcRwqyowLbQ==
   dependencies:
-    "@dekk-ui/combined-input-field" "^0.7.0"
-    "@dekk-ui/input-field" "^0.7.0"
-    "@dekk-ui/theme" "^0.7.0"
-    "@dekk-ui/utils" "^0.7.0"
+    "@dekk-ui/combined-input-field" "^0.8.0"
+    "@dekk-ui/focus-ring" "^0.8.0"
+    "@dekk-ui/input-field" "^0.8.0"
+    "@dekk-ui/theme" "^0.8.0"
+    "@dekk-ui/utils" "^0.8.0"
 
-"@dekk-ui/combined-input-field@0.7.0", "@dekk-ui/combined-input-field@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/combined-input-field/-/combined-input-field-0.7.0.tgz#4b22283ae20f214590e102b0284ae4d9003f5540"
-  integrity sha512-HgLQy4oXO0sdVcY9FvkCwLY+buN7T7BlC9ObH58QMf2jZxjHG7d0MMZXaozHppAA7Q0qkJtxcIP6hoWKFHAl4A==
+"@dekk-ui/combined-input-field@0.8.0", "@dekk-ui/combined-input-field@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/combined-input-field/-/combined-input-field-0.8.0.tgz#fb4e379ce2109f882eee6746f5e5b7b69eac015b"
+  integrity sha512-B8z+jEhbfTWlZuKgl8jQFaR53h9HJsO64h+I5p8FWayoLmXjApsBtPsaqOmLnAtqL1G5C0dfTmRnHuOLOR79dw==
   dependencies:
-    "@dekk-ui/focus-ring" "^0.7.0"
-    "@dekk-ui/input-field" "^0.7.0"
-    "@dekk-ui/theme" "^0.7.0"
-    "@dekk-ui/utils" "^0.7.0"
+    "@dekk-ui/focus-ring" "^0.8.0"
+    "@dekk-ui/input-field" "^0.8.0"
+    "@dekk-ui/theme" "^0.8.0"
+    "@dekk-ui/utils" "^0.8.0"
 
-"@dekk-ui/create-token@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/create-token/-/create-token-0.7.0.tgz#497e60001abc10f80a3dce72f9229a8fb6c90ed7"
-  integrity sha512-fFIfz8T/HLybGWcpLfaGHd2FBpbasHlPdow/mLHNL8cCQf9fgMxNyxSaAQC0VsQLjEAbOEHjXOpoddO7EOn0Ug==
+"@dekk-ui/create-token@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/create-token/-/create-token-0.8.0.tgz#27586e361568e7ed3156b5696866ed78d5065366"
+  integrity sha512-m5HSCvfJfQbtqGljIjAtVdlZr+TZztc12UmFojjtLMlbrCR1L1EYf+Uv5hE8KfyvLQpHdthtIDQSr0inI8XxJQ==
 
-"@dekk-ui/design-tokens@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/design-tokens/-/design-tokens-0.7.0.tgz#c1d87885dd97a5376c124c7722254cf6722dbd42"
-  integrity sha512-n2SyeDR5+d2TXOrUIeFJ2OeTRmxEsfMCzWb4r2GHB3/NJ7A32p+BEndhJYJ/bEKFCxpn0U/bTvaa4/NoiT36Og==
+"@dekk-ui/design-tokens@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/design-tokens/-/design-tokens-0.8.0.tgz#0302fdce71c56493f88731fbf0410a9249448ba1"
+  integrity sha512-hlPasAY0drLjaOlpk+MaGwmQ10VOu0AykUqu14MXgKQIhYlfkQ1qNosUiahWbfrUJU9p8O3JPQAXxvA9eM6Vhw==
   dependencies:
-    "@dekk-ui/create-token" "^0.7.0"
+    "@dekk-ui/create-token" "^0.8.0"
 
-"@dekk-ui/fieldset-row@0.7.0", "@dekk-ui/fieldset-row@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/fieldset-row/-/fieldset-row-0.7.0.tgz#4dcf96db0bef0e76fabc18789e15fcf219c83d1b"
-  integrity sha512-RIIiP/jbG7WLFGlK5J8zOvlMZj+/2Mje6A00pVLeHeg/rydPXFNbrWixej9Ob4DbYMfMlRJusqCJ6vO8IcCLAg==
+"@dekk-ui/fieldset-row@0.8.0", "@dekk-ui/fieldset-row@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/fieldset-row/-/fieldset-row-0.8.0.tgz#d948970a2eb2c26309f69293b99637a181c9402d"
+  integrity sha512-s0UFVeI1Y8eCHlfxJOBoYhgoB92l054BykQ9setP7nl3db856p6SUKiLwknX+Br13L05/dkPE0p7y/XFMGhBEA==
   dependencies:
-    "@dekk-ui/icons" "^0.7.0"
-    "@dekk-ui/theme" "^0.7.0"
-    "@dekk-ui/utils" "^0.7.0"
+    "@dekk-ui/icons" "^0.8.0"
+    "@dekk-ui/theme" "^0.8.0"
+    "@dekk-ui/utils" "^0.8.0"
 
-"@dekk-ui/focus-ring@0.7.0", "@dekk-ui/focus-ring@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/focus-ring/-/focus-ring-0.7.0.tgz#20d1e83cd83bf25ccc045e38ab2b691c08ba815a"
-  integrity sha512-OFipu8sH5dCK4CzBsfWZb1K8fjODpG6j8FAYBf+LaqRTvH3ZE6ASSShwM7bB7kDb+l1EE9p/BPBr8eEdoxWPhA==
+"@dekk-ui/focus-ring@0.8.0", "@dekk-ui/focus-ring@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/focus-ring/-/focus-ring-0.8.0.tgz#8aece9a7330bf6bb5b898b68876015168d33c80a"
+  integrity sha512-rJoL2S6qQJe50DIK7Pbh457jtMz2yvhn1a5GkD+NkVAxblA4ZZxW4YzrjitCqAwqLWMldCIiEWyeMtMc0NKmRA==
   dependencies:
-    "@dekk-ui/theme" "^0.7.0"
+    "@dekk-ui/theme" "^0.8.0"
 
-"@dekk-ui/icon-button@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/icon-button/-/icon-button-0.7.0.tgz#b2026221990ea38be53b0721518e57002b4db829"
-  integrity sha512-uv6UP6CBpqYhbh+pxPk5v5qqfxZUon3kw79wZUdQLw205b4ObPGHXcrdgIzJGUSLGQQ10TDtR3lP1a2OrmED7A==
+"@dekk-ui/icon-button@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/icon-button/-/icon-button-0.8.0.tgz#d15bbb59f07bafadd281875227db08894f6d60d9"
+  integrity sha512-dFFocW2aD+NOfXRoSHlqtP1N2oOlyIcPpssbEwhWEW2xBL9zddnVk0VLVQNR/Yu8V2yMJDUHbZZ2cjpMFdbOng==
   dependencies:
-    "@dekk-ui/focus-ring" "^0.7.0"
-    "@dekk-ui/icons" "^0.7.0"
-    "@dekk-ui/theme" "^0.7.0"
-    "@dekk-ui/utils" "^0.7.0"
+    "@dekk-ui/focus-ring" "^0.8.0"
+    "@dekk-ui/icons" "^0.8.0"
+    "@dekk-ui/theme" "^0.8.0"
+    "@dekk-ui/utils" "^0.8.0"
     type-fest "^2.3.3"
 
-"@dekk-ui/icon@0.7.0", "@dekk-ui/icon@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/icon/-/icon-0.7.0.tgz#4c5203cf926ac6e517e10f5755e4ef4fb3478641"
-  integrity sha512-Zk5PJ+TjyUP/0ExGN/I4WS4G8mT7tXaMFTPa7z1s121waDQFxeUbxEozIgzPCCQfOcggNK5crt9kwAuI7sDBCQ==
+"@dekk-ui/icon@0.8.0", "@dekk-ui/icon@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/icon/-/icon-0.8.0.tgz#cd7d4cd3c96963ac46c10894657ee0b872483931"
+  integrity sha512-w1RztchoX70I+uSiAHsuXRK2WFdpi6UbJRpgv76AfKKyfY3lbJfitEOCZHYfkNti5FJeg+DSBBn49wU9+A0IDA==
   dependencies:
-    "@dekk-ui/icons" "^0.7.0"
-    "@dekk-ui/theme" "^0.7.0"
-    "@dekk-ui/utils" "^0.7.0"
+    "@dekk-ui/icons" "^0.8.0"
+    "@dekk-ui/theme" "^0.8.0"
+    "@dekk-ui/utils" "^0.8.0"
 
-"@dekk-ui/icons@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/icons/-/icons-0.7.0.tgz#880a748bbef419a3bea50ea3a60c082c352c2931"
-  integrity sha512-NtRQ370ouWidIF+V7AHoHFB7ZHJfi4Et50TicpPCbZXSGzGlfrR8FaymCEVyDmCOCgIvi2+EuSG+l5/D8oHwTA==
+"@dekk-ui/icons@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/icons/-/icons-0.8.0.tgz#29e16e06af3f7ec64750c5808c548176232431d3"
+  integrity sha512-OIBPfdOswn1JXCRoUFCA36zWVkP52jOU31+G1z4aYib/MaDjr09Cxev2o5uL9QBq/2s6xhtytrlSHr4YcIQhgw==
 
-"@dekk-ui/input-field@0.7.0", "@dekk-ui/input-field@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/input-field/-/input-field-0.7.0.tgz#8e3a1affeafbc1e72074afc6783830838489d35b"
-  integrity sha512-0/T/4BggLnopzwXtI2cJCELUpzEOmZM0XsfKWHDs8gt89RD8vMLS4lER11kzkCkPBK4smR9u2VCu/Wc4ch9pdA==
+"@dekk-ui/input-field@0.8.0", "@dekk-ui/input-field@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/input-field/-/input-field-0.8.0.tgz#33dd71a5c2869997992f389c23d59069fc462ff5"
+  integrity sha512-WmjLyncj8ULk1cYYjlP4oPPx9pqKYg2kaUpA/rn80GSUZ56icOIWYWLATZeU5G0EzwNoSUITLnr1TydCfg8B9g==
   dependencies:
-    "@dekk-ui/focus-ring" "^0.7.0"
-    "@dekk-ui/theme" "^0.7.0"
-    "@dekk-ui/utils" "^0.7.0"
+    "@dekk-ui/focus-ring" "^0.8.0"
+    "@dekk-ui/theme" "^0.8.0"
+    "@dekk-ui/utils" "^0.8.0"
     type-fest "^2.3.3"
 
-"@dekk-ui/input-label@0.7.0", "@dekk-ui/input-label@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/input-label/-/input-label-0.7.0.tgz#bb8a848d1a880369771dd0d6432f0300ba718c9c"
-  integrity sha512-NIBNwjgyXYS9AJcVs7DyGy/8156QrEU21Pud+Z7NB96lQBSZQbpO2UaipugcVSvTeUgNgUtKH03uPku4FFhAfQ==
+"@dekk-ui/input-label@0.8.0", "@dekk-ui/input-label@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/input-label/-/input-label-0.8.0.tgz#7db52e48dfa114c33517d62e7a2d09e838c65877"
+  integrity sha512-5meVWuoUBJcYfQyKtltGCVhh376iZi0MkLuDOB8p4+n2F9LthhRrX88xW1jP07GDEOe/BM1QWm2CvYADSPIn6Q==
   dependencies:
-    "@dekk-ui/theme" "^0.7.0"
-    "@dekk-ui/utils" "^0.7.0"
+    "@dekk-ui/theme" "^0.8.0"
+    "@dekk-ui/utils" "^0.8.0"
     type-fest "^2.3.3"
 
-"@dekk-ui/multi-button@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/multi-button/-/multi-button-0.7.0.tgz#833b496ce4425cfcf3656b2c77ee669975a904b7"
-  integrity sha512-A18WA3NEl6zLf5nYvUXCyZ1GE5BwN1Qz7pusqqM0SOD4lh6m0TrF8wk0H2xd8RN1VeR2dUlqkF6bmjhHXo2fbA==
+"@dekk-ui/multi-button@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/multi-button/-/multi-button-0.8.0.tgz#e5f00456127f6d665a325a16bcd799bf04276fde"
+  integrity sha512-8GO2EaG41Z7YiIpej0cH4IZLRlbOYINOESHkNSeGEMw8YTlMvj7+R+/o0/vAGrR07LRpcbABR/LUDtMqfVzoxQ==
   dependencies:
-    "@dekk-ui/avatar" "^0.7.0"
-    "@dekk-ui/theme" "^0.7.0"
-    "@dekk-ui/utils" "^0.7.0"
+    "@dekk-ui/avatar" "^0.8.0"
+    "@dekk-ui/theme" "^0.8.0"
+    "@dekk-ui/toggle-button" "^0.8.0"
+    "@dekk-ui/utils" "^0.8.0"
 
-"@dekk-ui/range-knob-field@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/range-knob-field/-/range-knob-field-0.7.0.tgz#c7ed4feb4e7a21ae8b583288dc429407600c0434"
-  integrity sha512-eVmiLr/Y/3BjuT0zOKtT/EBlW8VHc9LvV52AFn84AypUQVsOsWcKfTwSVvGcQMZGtSiBSGHVjVzCtvFYrMgX/w==
+"@dekk-ui/range-knob-field@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/range-knob-field/-/range-knob-field-0.8.0.tgz#a36976d50060fe539e467fe4770c3f4c57f9eaab"
+  integrity sha512-gXrdzoFD/orBnRLHEZEkIk22m/bi4aq2FuPgNCAIrdRUjs3Tz1V3nkuTh0ArYdGqdVpkmQ7OXr/H4gNvXwhyag==
   dependencies:
-    "@dekk-ui/combined-input-field" "^0.7.0"
-    "@dekk-ui/fieldset-row" "^0.7.0"
-    "@dekk-ui/input-field" "^0.7.0"
-    "@dekk-ui/input-label" "^0.7.0"
-    "@dekk-ui/range-knob" "^0.7.0"
-    "@dekk-ui/theme" "^0.7.0"
-    "@dekk-ui/utils" "^0.7.0"
+    "@dekk-ui/combined-input-field" "^0.8.0"
+    "@dekk-ui/fieldset-row" "^0.8.0"
+    "@dekk-ui/input-field" "^0.8.0"
+    "@dekk-ui/input-label" "^0.8.0"
+    "@dekk-ui/range-knob" "^0.8.0"
+    "@dekk-ui/theme" "^0.8.0"
+    "@dekk-ui/utils" "^0.8.0"
 
-"@dekk-ui/range-knob@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/range-knob/-/range-knob-0.7.0.tgz#94396cdd20222deec40dad8f3937046aa61ece5a"
-  integrity sha512-LXEv2hpIgZEdcPe9i912o15nUzcGl4wyuYfH64EExDwHFVKe70Sqha3Qc5tD5KNuDWvFA07nj7An3h0cAiIOBA==
+"@dekk-ui/range-knob@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/range-knob/-/range-knob-0.8.0.tgz#3eee831def0052dd5c733e81c92774dbf1d6ae0a"
+  integrity sha512-7nFPguC3hzgyF0OVFeuXWT7ryoAsXtj7ImcVBFGkDhZpz5LzESeT5ly9nVYwz7/Qe2kGiedexiWC/meBpVtSTg==
   dependencies:
-    "@dekk-ui/focus-ring" "^0.7.0"
-    "@dekk-ui/theme" "^0.7.0"
-    "@dekk-ui/utils" "^0.7.0"
+    "@dekk-ui/focus-ring" "^0.8.0"
+    "@dekk-ui/theme" "^0.8.0"
+    "@dekk-ui/utils" "^0.8.0"
     type-fest "^2.3.3"
 
-"@dekk-ui/select@0.670 ":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/select/-/select-0.7.0.tgz#e0edad0a6b381daee81ccbb764d6a884b633c14f"
-  integrity sha512-iE7KeT1fB70QxyDPNHgJ61gbuoPu88m+7YRtFHX0zpg+X+l7KFcxC8yg3LriXh8X0eU8WgtEfrccCWsIoBRTRg==
+"@dekk-ui/select@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/select/-/select-0.8.0.tgz#24b5e9f21b18a2d1542e3b78873a68d9b7aba9dc"
+  integrity sha512-YycaxAxQd22xPwaimgxCE9K1Q2eHvynMWeU58mCY5klnm9qwoB/N/DyChKzrgHMl25Fr6wBtuDS0wbkD7O00Bw==
   dependencies:
-    "@dekk-ui/focus-ring" "^0.7.0"
-    "@dekk-ui/icon" "^0.7.0"
-    "@dekk-ui/icons" "^0.7.0"
-    "@dekk-ui/input-field" "^0.7.0"
-    "@dekk-ui/theme" "^0.7.0"
-    "@dekk-ui/utils" "^0.7.0"
+    "@dekk-ui/focus-ring" "^0.8.0"
+    "@dekk-ui/icon" "^0.8.0"
+    "@dekk-ui/icons" "^0.8.0"
+    "@dekk-ui/input-field" "^0.8.0"
+    "@dekk-ui/theme" "^0.8.0"
+    "@dekk-ui/utils" "^0.8.0"
     react-select "^4.3.1"
 
-"@dekk-ui/theme@0.7.0", "@dekk-ui/theme@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/theme/-/theme-0.7.0.tgz#04557b483d3531b400de6cfc126aa7b7e7bc2654"
-  integrity sha512-tH8xasP9DYIO8T4X/cZo44m0YzkIsavUt43LA9sj7TKgRJKHZ6z+OXpsxbyGOAKevlt5hqCPnpBIY0bpEY8Gog==
+"@dekk-ui/theme@0.8.0", "@dekk-ui/theme@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/theme/-/theme-0.8.0.tgz#542c2401d5732689d04de062d94dda040f237314"
+  integrity sha512-pW/p0ynXT5Cvj+BO/JTyyds1PYvFe0FHsQNIMiqLperUMDXF0PyqPQh/2NHKhKi5cCDAjWeOPRHl4joDA/V/Kg==
   dependencies:
-    "@dekk-ui/create-token" "^0.7.0"
-    "@dekk-ui/design-tokens" "^0.7.0"
+    "@dekk-ui/create-token" "^0.8.0"
+    "@dekk-ui/design-tokens" "^0.8.0"
 
-"@dekk-ui/toggle-button@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/toggle-button/-/toggle-button-0.7.0.tgz#d50bc86d07758800183ef975f6ec4e86a0fe5a8f"
-  integrity sha512-wB75W5QxBLAJw31JdSj8blG13CzaU5ixnNttcTQfnDdDh4kIo4bPdVtCP5JTaXil3Om6/cXXIBu4XXP5WWa72w==
+"@dekk-ui/toggle-button@0.8.0", "@dekk-ui/toggle-button@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/toggle-button/-/toggle-button-0.8.0.tgz#1e951043c2efae4fedf0094ab771ac9c845013e3"
+  integrity sha512-LRjYZIRh0WO+6Ap5YgbxXBogQhMow5yxxviXQmO/B8+nfZMMSQ8qPJwMcItIc8YoDm+QD2Um1IuKWzxWerEkgg==
   dependencies:
-    "@dekk-ui/focus-ring" "^0.7.0"
-    "@dekk-ui/theme" "^0.7.0"
-    "@dekk-ui/utils" "^0.7.0"
+    "@dekk-ui/focus-ring" "^0.8.0"
+    "@dekk-ui/theme" "^0.8.0"
+    "@dekk-ui/utils" "^0.8.0"
 
-"@dekk-ui/utils@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@dekk-ui/utils/-/utils-0.7.0.tgz#5a9744aa3d62570ff24afd6c11bb70ebeb6aaab9"
-  integrity sha512-M0nLxTj5Aix7EgJpINJXt9AXm1d04KJFuW2J3cYiwa1PfXrm7Jm+U82bQu/EG2Mi/pHvhPamBENV04X6YZTEgA==
+"@dekk-ui/utils@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@dekk-ui/utils/-/utils-0.8.0.tgz#50bce2b7a966ad7b855e639b8c948a38cd808c73"
+  integrity sha512-6MxkLZbZJ0sFD/gmYvbgPHIzfPi73mdldNW80EUhI1rRoybkxXHv3BYAcrnf/umfRztZ3WC/LrXGugOU7UZpsA==
+
+"@dnd-kit/accessibility@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@dnd-kit/accessibility/-/accessibility-3.0.0.tgz#b56e3750414fd907b7d6972b3116aa8f96d07fde"
+  integrity sha512-QwaQ1IJHQHMMuAGOOYHQSx7h7vMZPfO97aDts8t5N/MY7n2QTDSnW+kF7uRQ1tVBkr6vJ+BqHWG5dlgGvwVjow==
+  dependencies:
+    tslib "^2.0.0"
+
+"@dnd-kit/core@4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@dnd-kit/core/-/core-4.0.1.tgz#5ee7dbfc3f090cd1dc1efb5ec65b31b25a6027e8"
+  integrity sha512-C/rrzh0TCk6NgkzVgEkHX97GTP55nBhdhmTdEvsqZRsxnT56sBl4QVIsQVNt6T4L46PNh/ztktMWKwJxMB8VrQ==
+  dependencies:
+    "@dnd-kit/accessibility" "^3.0.0"
+    "@dnd-kit/utilities" "^3.0.0"
+    tslib "^2.0.0"
+
+"@dnd-kit/sortable@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@dnd-kit/sortable/-/sortable-5.0.0.tgz#33841fcbc2f2490aaae42906b7497a2033242faa"
+  integrity sha512-CvTuaTIqzvZe8r1Lt+2tPK7VZKfE0SQkFTcAMayf8jS6MFgX6TV5GAIb1tKvbqrGXkqqTZeA2EaeMzjFyyfqkQ==
+  dependencies:
+    "@dnd-kit/utilities" "^3.0.0"
+    tslib "^2.0.0"
+
+"@dnd-kit/utilities@3.0.0", "@dnd-kit/utilities@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@dnd-kit/utilities/-/utilities-3.0.0.tgz#43b86e9d911b625ee54786e9daae5a521949b8a6"
+  integrity sha512-E2UG8guqa532xB8kEe2rFEI/U2W7zuxv0zYorL3knnGJxMGBoI7132i4ULmQs/aunQvNy8kj6Ts39n+APeU7BQ==
+  dependencies:
+    tslib "^2.0.0"
 
 "@emotion/babel-plugin@^11.3.0":
   version "11.3.0"
@@ -10792,11 +10825,6 @@ postcss@^7.0.14, postcss@^7.0.17, postcss@^7.0.2, postcss@^7.0.21, postcss@^7.0.
     picocolors "^0.2.1"
     source-map "^0.6.1"
 
-postprocessing@6.23.1:
-  version "6.23.1"
-  resolved "https://registry.yarnpkg.com/postprocessing/-/postprocessing-6.23.1.tgz#9e76488b7bed37c41e30530ebd8d338c9f3e3016"
-  integrity sha512-HUSR5x50onDmw+1OqZvKE+qb9Lth1Y7pQcQHDH7IcgSMyp7Flvy2aKhZVhNgJQGnZY9qU0gFSVHEgnVuC+1/pw==
-
 potpack@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/potpack/-/potpack-1.0.1.tgz#d1b1afd89e4c8f7762865ec30bd112ab767e2ebf"
@@ -13012,7 +13040,7 @@ tsconfig-paths@^3.11.0, tsconfig-paths@^3.9.0:
     minimist "^1.2.0"
     strip-bom "^3.0.0"
 
-tslib@2.3.1, tslib@^2, tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@~2.3.0:
+tslib@2.3.1, tslib@^2, tslib@^2.0.0, tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@~2.3.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==

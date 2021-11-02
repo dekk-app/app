@@ -129,6 +129,8 @@ interface Store {
 	deleteEntity(id: string, parentId: string): void;
 	addSlice(input: SliceInput): Slice;
 	deleteSlice(id: string): void;
+	moveSlice(id: string, targetId: string): void;
+	moveEntity(id: string, targetId: string): void;
 	updateTextEntity(update: TextEntityUpdate, id: string): void;
 	updatePictureEntity(update: PictureEntityUpdate, id: string): void;
 	updateSlice(update: SliceUpdate, id: string): void;
@@ -315,18 +317,53 @@ export const useSpace = create<Store>(set => ({
 						const entityIndex = slice.entities.findIndex(entity => entity.id === id);
 						const entityIdIndex = slice.entityIds.indexOf(id);
 						slice.entities.splice(entityIndex, 1);
-						slice.entityIds.splice(entityIdIndex, 0);
+						slice.entityIds.splice(entityIdIndex, 1);
 					}
 				}
 			})
 		);
 	},
-	deleteSlice(id: string) {
+	deleteSlice(id) {
 		set(
 			produce<Store>(state => {
 				const index = state.slices.findIndex(slice => slice.id === id);
 				if (index > -1) {
 					state.slices.splice(index, 1);
+				}
+			})
+		);
+	},
+	moveSlice(id, targetId) {
+		set(
+			produce<Store>(state => {
+				const index = state.slices.findIndex(slice => slice.id === id);
+				const position = state.slices.findIndex(slice => slice.id === targetId);
+				if (index > -1 && position > -1) {
+					state.slices.splice(position, 0, state.slices.splice(index, 1)[0]);
+				}
+			})
+		);
+	},
+	moveEntity(id, targetId) {
+		set(
+			produce<Store>(state => {
+				const originIndex = state.slices.findIndex(slice => slice.entityIds.includes(id));
+				const targetIndex = state.slices.findIndex(slice =>
+					slice.entityIds.includes(targetId)
+				);
+				if (targetIndex > -1 && originIndex > -1) {
+					const index = state.slices[originIndex].entities.findIndex(
+						slice => slice.id === id
+					);
+					const position = state.slices[targetIndex].entities.findIndex(
+						slice => slice.id === targetId
+					);
+					if (index > -1 && position > -1) {
+						const [removed] = state.slices[originIndex].entities.splice(index, 1);
+						state.slices[targetIndex].entities.splice(position, 0, removed);
+						const [removedId] = state.slices[originIndex].entityIds.splice(index, 1);
+						state.slices[targetIndex].entityIds.splice(position, 0, removedId);
+					}
 				}
 			})
 		);

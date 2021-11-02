@@ -79,11 +79,8 @@ export const StyledPressable = styled.button<{ indentLevel?: number; isSelected?
 	${({ theme, indentLevel = 0, isSelected }) => css`
 		padding: ${pxToRem(theme.space.s)} ${pxToRem(theme.space.xs)};
 		padding-left: ${pxToRem(theme.space.s * (indentLevel + 1))};
-		${isSelected &&
-		css`
-			background: ${theme.ui.colors.primary};
-			color: ${theme.ui.colors.lightest};
-		`};
+		background: ${isSelected ? theme.ui.colors.primary : theme.ui.fill["1"]};
+		color: ${isSelected ? theme.ui.colors.lightest : theme.ui.text["1"]};
 	`};
 `;
 
@@ -96,7 +93,7 @@ export const StyledBackgroundPressable = styled(StyledPressable)`
 	left: 0;
 `;
 
-export const StyledExpandable = styled.div<{ indentLevel?: number; isSelected?: boolean }>`
+export const StyledTreeItem = styled.div<{ indentLevel?: number; isSelected?: boolean }>`
 	display: flex;
 	position: relative;
 	z-index: 0;
@@ -112,11 +109,8 @@ export const StyledExpandable = styled.div<{ indentLevel?: number; isSelected?: 
 	${({ theme, indentLevel = 0, isSelected }) => css`
 		padding: ${pxToRem(theme.space.s)} ${pxToRem(theme.space.xs)};
 		padding-left: ${pxToRem(theme.space.xs * (indentLevel + 1))};
-		${isSelected &&
-		css`
-			background: ${theme.ui.colors.primary};
-			color: ${theme.ui.colors.lightest};
-		`};
+		background: ${isSelected ? theme.ui.colors.primary : theme.ui.fill["1"]};
+		color: ${isSelected ? theme.ui.colors.lightest : theme.ui.text["1"]};
 	`};
 `;
 
