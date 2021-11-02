@@ -19,7 +19,7 @@ export const useUnsplash = (query, delay = 200) => {
 			return;
 		}
 
-		const url = `http://localhost:3000/api/unsplash/search/photos?page=1&per_page=100&query=${debouncedQuery}`;
+		const url = `/api/unsplash/search/photos?page=1&per_page=100&query=${debouncedQuery}`;
 		setLoading(true);
 		setError(null);
 		axios
