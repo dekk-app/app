@@ -46,7 +46,7 @@ export const TextEntity = ({
 	const isActiveSlice = activeSlice === slice.id;
 
 	const fontObject = fonts?.find(({ family }) => family === font.family);
-	const fontFile = fontObject?.files[font.variant];
+	const fontFile = fontObject?.files[font.variant].replace(/^http:/, "https:");
 	const siblings = useMemo(() => {
 		const points = getPoints(spaceWidth, spaceHeight, { x: 4, y: 4 });
 		return [...points, ...slice.entities.map(({ x, y, id }) => ({ x, y, id }))];

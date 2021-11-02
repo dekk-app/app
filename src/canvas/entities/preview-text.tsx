@@ -19,7 +19,7 @@ export const PreviewTextEntity = ({
 }: TextEntityType) => {
 	const fonts = useFontStore(state => state.fonts);
 	const fontObject = fonts?.find(({ family }) => family === font.family);
-	const fontFile = fontObject?.files[font.variant];
+	const fontFile = fontObject?.files[font.variant].replace(/^http:/, "https:");
 
 	return (
 		<group position={[x, y, z]}>
