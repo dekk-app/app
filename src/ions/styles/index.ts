@@ -1,4 +1,5 @@
 import { pxToRem } from "@/ions/utils/unit";
+import { focus } from "@dekk-ui/focus-ring";
 import { css } from "@emotion/react";
 
 export const globalStyles = css`
@@ -10,6 +11,7 @@ export const globalStyles = css`
 
 	html {
 		font-size: 16px;
+		user-select: none;
 	}
 
 	body {
@@ -32,5 +34,13 @@ export const globalStyles = css`
 	}
 	a {
 		color: currentColor;
+
+		&:focus {
+			outline: 0;
+		}
+
+		&:focus-visible {
+			${focus};
+		}
 	}
 `;

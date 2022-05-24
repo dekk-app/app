@@ -12,10 +12,11 @@ const prisma = new PrismaClient();
 /* eslint-disable new-cap */
 export default NextAuth({
 	pages: {
-		signIn: "/auth/signin",
-		signOut: "/auth/signout",
-		error: "/auth/error",
-		verifyRequest: "/auth/verify-request",
+		// Enable when custom pages exist
+		// signIn: "/auth/signin",
+		// signOut: "/auth/signout",
+		// error: "/auth/error",
+		// verifyRequest: "/auth/verify-request",
 	},
 	providers: [
 		Providers.Google({

@@ -80,6 +80,10 @@ class AppDocument extends Document {
 						as="font"
 						crossOrigin="anonymous"
 					/>
+					<link
+						href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+						rel="stylesheet"
+					/>
 				</Head>
 				<body>
 					<script src="/noflash.js" />
